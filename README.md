@@ -1,4 +1,4 @@
-# Julia for Data Science and Statistical Computing (JSM 2022 Short Course CE_23C)
+# Julia for Data Science and Statistical Computing
 
 This repo contains the materials for the short course [Julia for Data Science and Statistical Computing](https://ww2.amstat.org/meetings/jsm/2022/onlineprogram/ActivityDetails.cfm?SessionID=223492) at 2022 Joint Statistical Meeting (JSM), Washington, DC, United States on August 9, 2022.
 
@@ -64,8 +64,8 @@ We provide a server where you can run tutorials (Pluto or Jupyter notebooks) dur
 
     Course assistants: 
     - Dr. Josh Day  
+    - Dr. Seyoon Ko (remote)  
     - Dr. Hua Zhou  
-    - Dr. Jin Zhou  
     - Xinkai Zhou  
     
 2. In JupyterLab, avoid running many kernels at the same time. Promptly shut down the kernels you don't use. 
