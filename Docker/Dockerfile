@@ -69,6 +69,7 @@ RUN julia -e 'import Pkg; Pkg.update()' && \
       "Makie", \
       "PGENFiles", \
       "Pipe", \
+      "Pluto", \
       "PrettyTables", \
       "PyCall", \
       "PyPlot", \
