@@ -38,9 +38,9 @@ singleuser:
         command:
           [
             "gitpuller",
-            "https://github.com/LangeSymposium/2022-July-Workshop.git",
+            "https://github.com/Hua-Zhou/JSM-Julia-Short-Course-2022.git",
             "main",
-            "Lange-Symposium-Workshop",
+            "JSM2022-Julia-Short-Course",
           ]
 hub:
   config:

@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  datascience-notebook:
+    image: kose/jsm2022-julia-short-course:latest
+    ports:
+      - 8888:8888
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1G
+    networks:
+      - webnet
+networks:
+  webnet: 

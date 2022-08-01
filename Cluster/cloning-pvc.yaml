@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mimic-iv-pvc-rom
+  namespace: jhub
+spec:
+  dataSource:
+    name: mimic-iv-pvc-tmp
+    kind: PersistentVolumeClaim
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: premium-rwo
+  resources:
+    requests:
+      storage: 21G
