@@ -207,7 +207,13 @@ s * ", $s2"
 s * ',' * ' ' * s2
 
 # ╔═╡ a5b156d2-37b2-405e-a10c-b6c4fbf4898b
-*(s, ',', ' ', s2)  # Infix operators are just functions!
+*(s, ',', ' ', s2)
+
+# ╔═╡ f6478023-4c10-450a-accf-fcdf78f7a6e1
+highlight(md"Infix operators are just functions!")
+
+# ╔═╡ fb255a31-88b9-4f3e-bdd5-e1ffe608dc24
+reduce(+, [1,2,3])
 
 # ╔═╡ c2edcda4-2022-49c4-8ffd-f6c313856a30
 md"### String Macros change the *interpretation* of a String"
@@ -485,10 +491,10 @@ highlight(md"""
 """)
 
 # ╔═╡ 0ea9966d-89f4-436a-8a71-f499305873df
-dist = Beta(2, 300) # Try changing this!
+dist = Normal(50,20) # Try changing this!
 
 # ╔═╡ 1dc210d4-fd42-4804-ad56-5cd2879875b5
-let
+begin
 	rng = .01:.02:.99
 	qs = quantile.(dist, rng)
 	xlim = quantile(dist, .001), quantile(dist, .999)
@@ -1819,6 +1825,8 @@ version = "0.9.1+5"
 # ╠═8d7cc119-638b-42e6-b1f1-47dffb9f12b4
 # ╠═327604dd-5212-43ed-af9b-b1a89f32b9bf
 # ╠═a5b156d2-37b2-405e-a10c-b6c4fbf4898b
+# ╟─f6478023-4c10-450a-accf-fcdf78f7a6e1
+# ╠═fb255a31-88b9-4f3e-bdd5-e1ffe608dc24
 # ╟─c2edcda4-2022-49c4-8ffd-f6c313856a30
 # ╠═df148b9e-02e3-4aac-8a1a-ab3562e7915a
 # ╠═53520d7a-908d-42bb-b3ff-b93c669eb9bf
@@ -1873,7 +1881,7 @@ version = "0.9.1+5"
 # ╠═4fd5020a-c66c-4e41-be71-59c6aebc2918
 # ╟─71a4df97-3f50-43a4-abc7-f782dbc0e359
 # ╠═0ea9966d-89f4-436a-8a71-f499305873df
-# ╟─1dc210d4-fd42-4804-ad56-5cd2879875b5
+# ╠═1dc210d4-fd42-4804-ad56-5cd2879875b5
 # ╟─b49d1a7b-80dd-4f90-9d03-22f3698f3f12
 # ╟─f2cf21e2-62ac-4b46-bc5f-96a869323760
 # ╟─a5b5875e-85e9-4729-9675-4900af676f7d
