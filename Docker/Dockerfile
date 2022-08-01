@@ -29,7 +29,6 @@ RUN arch=$(uname -m) && \
 
 USER root
 COPY install-packages.jl /opt/julia-${JULIA_VERSION}/
-COPY sysimage-precompile.jl /opt/julia-${JULIA_VERSION}/
 
 USER ${NB_UID}
 ENV JULIA_DEFAULT_ENV="${JULIA_DEPOT_PATH}/environments/v1.7"
@@ -54,18 +53,21 @@ RUN julia --threads 4 /opt/julia-${JULIA_VERSION}/install-packages.jl && \
 # RUN julia -e 'using PackageCompiler; create_sysimage([:Plots, :PGFPlotsX, :LaTeXStrings, :IJulia, :Pluto]; precompile_statements_file="/opt/julia-1.7.3/sysimage-precompile.jl", sysimage_path="/opt/julia-1.7.3/sys_pluto.so")' && \ 
 #     fix-permissions "/opt/julia-1.7.3/"
 
-
 ## Configure jupyter
 
 RUN git clone https://github.com/pankgeorg/pluto-on-jupyterlab.git; \
     pushd pluto-on-jupyterlab; \
-    pip3 install .; \
+    pip3 install . --no-cache-dir ; \
     cp ./runpluto.sh ${HOME}; \
     popd; \
-    rm -rf ${HOME}/pluto-on-jupyterlab
+    rm -rf ${HOME}/pluto-on-jupyterlab; \
+    rm -rf ~/.cache
 
-RUN jupyter labextension install @jupyterlab/server-proxy
-RUN jupyter lab build
+RUN jupyter labextension install @jupyterlab/server-proxy && \
+    jupyter lab build && \
+    jupyter lab clean && \
+    rm -rf ~/.cache
 
+# disable download (do we still need it?)
 RUN jupyter labextension disable @jupyterlab/docmanager-extension:download \
     && jupyter labextension disable @jupyterlab/filebrowser-extension:download
