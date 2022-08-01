@@ -25,3 +25,9 @@ docs/site/
 # environment.
 Manifest.toml
 .Rproj.user
+
+
+*.pdf
+*.png
+*.jpg
+*.jpeg

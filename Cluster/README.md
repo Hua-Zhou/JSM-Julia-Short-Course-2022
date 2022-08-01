@@ -57,7 +57,7 @@ Create namespace:
 kubectl create namespace jhub
 ```
 
-Then create a read-only `PersistentVolume`, as in the last section. 
+If we use a shared dataset, create a read-only `PersistentVolume` as in the final section. 
 
 Install JupyterHub by helm:
 ```
