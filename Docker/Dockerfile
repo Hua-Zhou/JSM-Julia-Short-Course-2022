@@ -64,5 +64,5 @@ RUN jupyter labextension install @jupyterlab/server-proxy && \
     rm -rf ~/.cache
 
 # disable download (do we still need it?)
-RUN jupyter labextension disable @jupyterlab/docmanager-extension:download \
-    && jupyter labextension disable @jupyterlab/filebrowser-extension:download
+# RUN jupyter labextension disable @jupyterlab/docmanager-extension:download \
+#     && jupyter labextension disable @jupyterlab/filebrowser-extension:download
