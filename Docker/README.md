@@ -1,4 +1,4 @@
-# Local testing
+# Building Docker image
 
 Build Docker image and tag:
 ```

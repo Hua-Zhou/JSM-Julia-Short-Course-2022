@@ -1,6 +1,7 @@
 using Pkg
 
-Pkg.update()
+Pkg.resolve()
+Pkg.instantiate()
 
 pkgs = getfield.(filter(p -> p.is_direct_dep, collect(values(Pkg.dependencies()))), :name)
 

@@ -9,29 +9,23 @@
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 #
 singleuser:
+
+
   image:
     # You should replace the "latest" tag with a fixed version from:
     # https://hub.docker.com/r/jupyter/datascience-notebook/tags/
     # Inspect the Dockerfile at:
     # https://github.com/jupyter/docker-stacks/tree/HEAD/datascience-notebook/Dockerfile
-    name: huazhou/lange_symposium_workshop_2022
-    tag: latest
+
+    name: kose/jsm2022-julia-short-course
+    tag: prelim
   memory:
     limit: 3.6G
-    guarantee: 3G
+    guarantee: 1G # 3.2G on the Workshop day
   cpu:
     limit: 1
-    guarantee: 0.9
-  storage:
-    extraVolumes:
-      - name: mimic-iv-pv
-        persistentVolumeClaim:
-          claimName: mimic-iv-pvc-rom
-          readOnly: true
-    extraVolumeMounts:
-      - name: mimic-iv-pv
-        mountPath: /home/shared
-        readOnly: true
+    guarantee: 0.2 # 0.9 on the Workshop day
+    
   lifecycleHooks:
     postStart:
       exec:
@@ -40,19 +34,23 @@ singleuser:
             "gitpuller",
             "https://github.com/Hua-Zhou/JSM-Julia-Short-Course-2022.git",
             "main",
-            "JSM2022-Julia-Short-Course",
+            "JSM-Julia-Short-Course-2022",
           ]
+
+proxy:
+  https:
+    enabled: false
+
 hub:
   config:
     Authenticator:
       admin_users:
-        - admin1
-        - admin2
+        - admin01
+        - admin02
+        - admin03
       allowed_users:
-        - user1
-        - user2
-        - user3
+        - user01
     DummyAuthenticator:
-      password: lange
+      password: xxxxxxxx
     JupyterHub:
       authenticator_class: dummy
