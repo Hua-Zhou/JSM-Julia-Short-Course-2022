@@ -408,7 +408,7 @@ We have not told Julia about what the input to our function will be, but we get 
 highlight(md"""
 #### The code below errors!  Why?
 
-- Complex number are not in the set of `Real`s.
+- Complex numbers are not in the set of `Real`s.
 """)
 
 # ╔═╡ 5bc35374-ce50-4822-b353-0b4c4eafa708
