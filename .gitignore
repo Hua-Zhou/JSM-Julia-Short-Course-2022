@@ -25,9 +25,11 @@ docs/site/
 # environment.
 Manifest.toml
 .Rproj.user
-
+.Rhistory
 
 *.pdf
 *.png
 *.jpg
 *.jpeg
+
+.ipynb_checkpoints/
