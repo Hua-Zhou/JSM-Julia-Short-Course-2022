@@ -13145,79 +13145,12 @@ Environment:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre><span></span><span class="c"># load packages in environment</span>
-<span class="k">import</span> <span class="n">Pkg</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="s">&quot;../../Docker&quot;</span><span class="p">)</span>
-<span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre><span class="ansi-green-intense-fg ansi-bold">  Activating</span> project at `~/Documents/github.com/JSM-Julia-Short-Course-2022/Docker`
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-green-intense-fg ansi-bold">      Status</span> `~/Documents/github.com/JSM-Julia-Short-Course-2022/Docker/Project.toml`
- <span class="ansi-black-intense-fg"> [1520ce14] </span>AbstractTrees v0.3.4
- <span class="ansi-black-intense-fg"> [2169fc97] </span>AlgebraicMultigrid v0.4.2
- <span class="ansi-black-intense-fg"> [7d9fca2a] </span>Arpack v0.5.3
- <span class="ansi-black-intense-fg"> [336ed68f] </span>CSV v0.10.4
- <span class="ansi-black-intense-fg"> [31c24e10] </span>Distributions v0.25.66
- <span class="ansi-black-intense-fg"> [38e38edf] </span>GLM v1.8.0
- <span class="ansi-black-intense-fg"> [28b8d3ca] </span>GR v0.66.0
- <span class="ansi-black-intense-fg"> [c27321d9] </span>Glob v1.3.0
- <span class="ansi-black-intense-fg"> [42fd0dbc] </span>IterativeSolvers v0.9.2
- <span class="ansi-black-intense-fg"> [7a12625a] </span>LinearMaps v3.8.0
- <span class="ansi-black-intense-fg"> [a15396b6] </span>OnlineStats v1.5.13
- <span class="ansi-black-intense-fg"> [ca7969ec] </span>PlotlyLight v0.5.1
- <span class="ansi-black-intense-fg"> [91a5bcdd] </span>Plots v1.31.5
- <span class="ansi-black-intense-fg"> [c3e4b0f8] </span>Pluto v0.19.11
- <span class="ansi-black-intense-fg"> [7f904dfe] </span>PlutoUI v0.7.39
- <span class="ansi-black-intense-fg"> [af69fa37] </span>Preconditioners v0.5.0
- <span class="ansi-black-intense-fg"> [438e738f] </span>PyCall v1.93.1
- <span class="ansi-black-intense-fg"> [6f49c342] </span>RCall v0.13.13
- <span class="ansi-black-intense-fg"> [ce6b1742] </span>RDatasets v0.7.7
- <span class="ansi-black-intense-fg"> [2913bbd2] </span>StatsBase v0.33.20
- <span class="ansi-black-intense-fg"> [f3b207a7] </span>StatsPlots v0.15.1
- <span class="ansi-black-intense-fg"> [b8865327] </span>UnicodePlots v3.0.4
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><ul>
 <li><p>Conjugate gradient is the top-notch iterative method for solving large, <strong>structured</strong> linear systems $\mathbf{A} \mathbf{x} = \mathbf{b}$, where $\mathbf{A}$ is pd.<br>
-Earlier we talked about Jacobi, Gauss-Seidel, and successive over-relaxation (SOR) as the classical iterative solvers. They are rarely used in practice due to slow convergence.</p>
+Classical iterative solvers such as Jacobi, Gauss-Seidel, and successive over-relaxation (SOR) are rarely used in practice due to slow convergence.</p>
 <p><a href="http://www.sciencedirect.com/science/article/pii/0021999178900980?via%3Dihub">Kershaw's results</a> for a fusion problem.</p>
 </li>
 </ul>
@@ -13453,7 +13386,7 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">BenchmarkTools</span><span class="p">,</span> <span class="n">MatrixDepot</span><span class="p">,</span> <span class="n">IterativeSolvers</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">SparseArrays</span>
@@ -13476,25 +13409,28 @@ Choose $\mathbf{C}$ such that</p>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>┌ Info: verify download of index files...
-└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/GEDc3/src/MatrixDepot.jl:139
+<pre>┌ Info: Precompiling MatrixDepot [b51810bb-c9f3-55da-ae3c-350fc1fbce05]
+└ @ Base loading.jl:1423
+WARNING: could not import HDF5.exists into MAT
+┌ Info: verify download of index files...
+└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/T9mnt/src/MatrixDepot.jl:118
 ┌ Info: reading database
-└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/GEDc3/src/download.jl:23
+└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/T9mnt/src/download.jl:23
 ┌ Info: adding metadata...
-└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/GEDc3/src/download.jl:67
+└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/T9mnt/src/download.jl:67
 ┌ Info: adding svd data...
-└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/GEDc3/src/download.jl:69
+└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/T9mnt/src/download.jl:69
 ┌ Info: writing database
-└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/GEDc3/src/download.jl:74
+└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/T9mnt/src/download.jl:74
 ┌ Info: used remote sites are sparse.tamu.edu with MAT index and math.nist.gov with HTML index
-└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/GEDc3/src/MatrixDepot.jl:141
+└ @ MatrixDepot /Users/huazhou/.julia/packages/MatrixDepot/T9mnt/src/MatrixDepot.jl:120
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -13531,7 +13467,7 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">UnicodePlots</span>
@@ -13548,7 +13484,19 @@ Choose $\mathbf{C}$ such that</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>┌ Info: Precompiling UnicodePlots [b8865327-cd53-5732-bb35-84acbb429228]
+└ @ Base loading.jl:1423
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -13589,7 +13537,7 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="c"># sparsity level</span>
@@ -13606,7 +13554,7 @@ Choose $\mathbf{C}$ such that</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -13623,12 +13571,32 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="c"># rhs</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="c"># solve Ax=b by CG</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For comparison, solving Ax=b by (dense) Cholesky takes &gt;1 minutes on my laptop.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-julia"><pre><span></span><span class="c"># solve Ax=b by CG</span>
 <span class="n">xcg</span> <span class="o">=</span> <span class="n">cg</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 <span class="nd">@benchmark</span> <span class="n">cg</span><span class="p">(</span><span class="o">$</span><span class="n">A</span><span class="p">,</span> <span class="o">$</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
@@ -13649,14 +13617,14 @@ Choose $\mathbf{C}$ such that</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>BenchmarkTools.Trial: 29 samples with 1 evaluation.
- Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">166.153 ms</span> … <span class="ansi-magenta-fg">181.899 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">173.232 ms               </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">172.992 ms</span> ± <span class="ansi-green-fg">  3.458 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>0.00% ± 0.00%
+<pre>BenchmarkTools.Trial: 30 samples with 1 evaluation.
+ Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">162.276 ms</span> … <span class="ansi-magenta-fg">173.942 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">166.314 ms               </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">166.768 ms</span> ± <span class="ansi-green-fg">  3.059 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>0.00% ± 0.00%
 
-                ▃          <span class="ansi-blue-fg"> </span><span class="ansi-green-fg"> </span>▃█ ▃ ▃                              
-  ▇▁▁▁▁▁▇▁▇▁▁▁▁▁█▇▁▇▁▇▇▇▇▇▇<span class="ansi-blue-fg">▇</span><span class="ansi-green-fg">▁</span>██▇█▁█▁▇▁▇▁▁▁▁▁▁▁▁▁▁▇▁▁▁▁▁▁▁▁▁▁▇▁▇ ▁
-  166 ms<span class="ansi-black-intense-fg">           Histogram: frequency by time</span>          182 ms <span class="ansi-bold">&lt;</span>
+  ▃      ▃   ▃ ▃▃     <span class="ansi-blue-fg"> </span>  <span class="ansi-green-fg"> </span> █  █                      ▃           
+  █▁▇▁▁▁▁█▁▁▁█▁██▇▁▇▁▇<span class="ansi-blue-fg">▇</span>▁▇<span class="ansi-green-fg">▁</span>▇█▁▁█▁▇▁▁▁▁▁▇▁▁▁▁▁▇▁▁▁▁▁▁▁▁█▁▇▁▁▁▁▁▁▇ ▁
+  162 ms<span class="ansi-black-intense-fg">           Histogram: frequency by time</span>          174 ms <span class="ansi-bold">&lt;</span>
 
  Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">951.14 KiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">16</span>.</pre>
 </div>
@@ -13698,7 +13666,7 @@ Choose $\mathbf{C}$ such that</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  1.142510 seconds (2.27 M allocations: 149.117 MiB, 3.30% gc time, 95.21% compilation time)
+<pre>  1.151155 seconds (2.27 M allocations: 149.129 MiB, 4.22% gc time, 93.74% compilation time)
 </pre>
 </div>
 </div>
@@ -13711,51 +13679,9 @@ Choose $\mathbf{C}$ such that</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>CholeskyPreconditioner{LimitedLDLFactorizations.LimitedLDLFactorization{Float64, Int64}}(LimitedLDLFactorizations.LimitedLDLFactorization{Float64, Int64}(sparse([3, 4, 5, 11, 12, 1557, 1558, 1559, 1599, 4639  …  30397, 30398, 30399, 30400, 30398, 30399, 30400, 30399, 30400, 30400], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1  …  30396, 30396, 30396, 30396, 30397, 30397, 30397, 30398, 30398, 30399], [0.32188678902931156, -0.18750000000000003, 0.30311321097068844, 0.24249056877655073, -0.12124528438827537, 0.3218867890293116, -0.1875, -0.12124528438827537, 0.30311321097068844, -0.12875471561172463  …  -0.20400017061730055, 0.05345925607317676, 0.22696303270550675, -0.11924817118009165, -0.01765254844920382, -0.11398264783341637, 0.0631180338937474, 0.01792088850768415, -0.014126113317446322, -0.032428050048984185], 30401, 30401), [108.07268375334515, 19.731909243468316, 52.690256305658224, 19.06141815112384, 45.62016373220578, 40.85836712015185, 67.44205939209526, 59.96871055371719, 15.846065702117654, 16.719281271170335  …  20.076467364367097, 25.198770052019718, 6.627443087505212, 3.1714819700858072, 8.217102536940756, 31.72759514370998, 15.169344757703938, 33.78353237873128, 8.39199999562848, 38.94057430766869], [5112, 5414, 5290, 5291, 5292, 5114, 5416, 5294, 5295, 5296  …  29131, 29261, 29429, 29563, 29731, 29865, 30033, 30167, 30335, 19305], 0.0), 2)</pre>
+<pre>CholeskyPreconditioner{LimitedLDLFactorizations.LimitedLDLFactorization{Float64, Int64}}(LimitedLDLFactorizations.LimitedLDLFactorization{Float64, Int64}(sparse([3, 4, 5, 11, 12, 1557, 1558, 1559, 1599, 4639  …  30397, 30398, 30399, 30400, 30398, 30399, 30400, 30399, 30400, 30400], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1  …  30396, 30396, 30396, 30396, 30397, 30397, 30397, 30398, 30398, 30399], [0.2088359600778443, -0.18749999999999997, 0.41616403992215567, 0.3329312319377246, -0.16646561596886225, 0.20883596007784427, -0.1875, -0.1664656159688623, 0.41616403992215556, -0.08353438403113772  …  -0.16708316541570328, 0.031044159928732173, 0.1352191127317804, -0.0676095563658902, -0.06272302520592542, -0.15483650375668012, 0.0830005388458726, 0.05436062555938801, -0.03132380509756216, -0.032130312749342416], 30401, 30401), [84.70625789284415, 83.82528276768855, 55.94351602588364, 25.67472689750302, 71.42359340172017, 69.65951857320451, 68.74995922817483, 30.089280582481557, 20.876956904558188, 65.64949425330217  …  8.407102268066605, 30.911295674567697, 17.725690674817418, 47.79148480093242, 19.48925480472817, 43.355725954631325, 20.139693634344034, 46.751852574034025, 11.625640626376946, 31.03035404302105], [5112, 5414, 5290, 5291, 5292, 5114, 5416, 5294, 5295, 5296  …  29131, 29261, 29429, 29563, 29731, 29865, 30033, 30167, 30335, 19305], 0.0), 2)</pre>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre><span></span><span class="n">dump</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CholeskyPreconditioner{LimitedLDLFactorizations.LimitedLDLFactorization{Float64, Int64}}
-  ldlt: LimitedLDLFactorizations.LimitedLDLFactorization{Float64, Int64}
-    L: SparseMatrixCSC{Float64, Int64}
-      m: Int64 30401
-      n: Int64 30401
-      colptr: Array{Int64}((30402,)) [1, 13, 25, 37, 54, 65, 77, 89, 101, 118  …  265048, 265051, 265055, 265058, 265062, 265065, 265067, 265068, 265068, 265068]
-      rowval: Array{Int64}((265067,)) [3, 4, 5, 11, 12, 1557, 1558, 1559, 1599, 4639  …  30397, 30398, 30399, 30400, 30398, 30399, 30400, 30399, 30400, 30400]
-      nzval: Array{Float64}((265067,)) [0.32188678902931156, -0.18750000000000003, 0.30311321097068844, 0.24249056877655073, -0.12124528438827537, 0.3218867890293116, -0.1875, -0.12124528438827537, 0.30311321097068844, -0.12875471561172463  …  -0.20400017061730055, 0.05345925607317676, 0.22696303270550675, -0.11924817118009165, -0.01765254844920382, -0.11398264783341637, 0.0631180338937474, 0.01792088850768415, -0.014126113317446322, -0.032428050048984185]
-    D: Array{Float64}((30401,)) [108.07268375334515, 19.731909243468316, 52.690256305658224, 19.06141815112384, 45.62016373220578, 40.85836712015185, 67.44205939209526, 59.96871055371719, 15.846065702117654, 16.719281271170335  …  20.076467364367097, 25.198770052019718, 6.627443087505212, 3.1714819700858072, 8.217102536940756, 31.72759514370998, 15.169344757703938, 33.78353237873128, 8.39199999562848, 38.94057430766869]
-    P: Array{Int64}((30401,)) [5112, 5414, 5290, 5291, 5292, 5114, 5416, 5294, 5295, 5296  …  29131, 29261, 29429, 29563, 29731, 29865, 30033, 30167, 30335, 19305]
-    α: Float64 0.0
-  memory: Int64 2
-</pre>
-</div>
 </div>
 
 </div>
@@ -13772,7 +13698,7 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="c"># solver Ax=b by PCG</span>
@@ -13791,13 +13717,13 @@ Choose $\mathbf{C}$ such that</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[8]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>6.049003884532266e-7</pre>
+<pre>5.679743163573514e-7</pre>
 </div>
 
 </div>
@@ -13808,7 +13734,7 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="c"># PCG is &gt;10 fold faster than CG</span>
@@ -13825,22 +13751,22 @@ Choose $\mathbf{C}$ such that</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>BenchmarkTools.Trial: 185 samples with 1 evaluation.
- Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">23.769 ms</span> … <span class="ansi-magenta-fg">46.098 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">26.140 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">27.099 ms</span> ± <span class="ansi-green-fg"> 3.090 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>0.19% ± 1.61%
+<pre>BenchmarkTools.Trial: 168 samples with 1 evaluation.
+ Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">24.571 ms</span> … <span class="ansi-magenta-fg">38.756 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">28.715 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">29.786 ms</span> ± <span class="ansi-green-fg"> 3.303 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>0.24% ± 1.62%
 
-    ▁▆█▄▃▇ ▃ <span class="ansi-blue-fg">█</span> ▂  <span class="ansi-green-fg"> </span>                                            
-  ▃▅█████████<span class="ansi-blue-fg">█</span>▇█▅▇<span class="ansi-green-fg">▇</span>▃▆▄▄▅█▃▃▄▃▄▁▄▄▃▃▄▄▆▁▄▃▁▃▃▃▁▃▁▁▃▁▃▁▁▄▃▁▃▁▁▃ ▃
-  23.8 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>        36.3 ms <span class="ansi-bold">&lt;</span>
+         █▇▃▁ ▆▂     <span class="ansi-blue-fg"> </span>    <span class="ansi-green-fg"> </span>          ▁ ▁ ▂▁                    
+  ▄▁▁▁▁▆▆████▇██▆██▄▆<span class="ansi-blue-fg">▄</span>▆▇▃▆<span class="ansi-green-fg">▃</span>▃▁▃▁█▄▃▄▆▃█▁█▆██▄▃▇▆▇▃▄▃▁▃▄▁▁▁▁▃▁▄ ▃
+  24.6 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>        37.4 ms <span class="ansi-bold">&lt;</span>
 
- Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">951.38 KiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">31</span>.</pre>
+ Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">951.39 KiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">32</span>.</pre>
 </div>
 
 </div>
@@ -13851,7 +13777,7 @@ Choose $\mathbf{C}$ such that</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">AlgebraicMultigrid</span>
@@ -13872,14 +13798,14 @@ Choose $\mathbf{C}$ such that</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>  2.760574 seconds (6.72 M allocations: 412.542 MiB, 4.24% gc time, 96.91% compilation time)
+<pre>  2.890813 seconds (6.73 M allocations: 413.083 MiB, 4.69% gc time, 97.18% compilation time)
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[11]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -13890,17 +13816,17 @@ Choose $\mathbf{C}$ such that</p>
 Operator Complexity: 1.135
 Grid Complexity: 1.135
 No. of Levels: 8
-Coarse Solver: AlgebraicMultigrid.Pinv{Float64}([0.00015842331124636504 -1.6022201898823692e-17 -1.4815697301743567e-13 4.363351880035292e-25 -9.163147220713984e-30 5.819424314569221e-32; -1.602220189892125e-17 9.672435103352185e-5 -3.0462104077984138e-18 -2.634109728431766e-12 1.2953810789965848e-26 -1.5012395214413314e-24; -1.4815697301743287e-13 -3.08916460611834e-18 0.00011799554006326211 8.438293728298455e-26 -5.379101607837874e-21 -4.6347012110473976e-23; 4.363351880032944e-25 -2.634109728431766e-12 8.415057057994538e-26 0.0002558705727654952 1.8942452655413145e-23 -1.1435039707019004e-17; 7.94631210512834e-30 -1.9294492004734062e-27 -6.3286213895499264e-21 1.1856921528548999e-23 9.501374375035341e-5 -1.0819349873663022e-13; 5.819425423171495e-32 -1.5012398636209458e-24 -4.634701272571743e-23 -1.143503978172708e-17 -1.08193498749706e-13 0.0002619913128088403])
+Coarse Solver: AlgebraicMultigrid.Pinv{Float64}([9.142037257385934e-5 8.544069916603293e-21 0.0 6.0298204020121415e-27 -6.082196388793863e-20 0.0 0.0; -1.260660722369978e-20 0.00013488896281657777 -4.939461449289607e-12 -3.05125725390528e-14 2.1967464330722304e-20 2.207464228189998e-20 -4.9174818679363194e-24; 4.61637857512221e-28 -4.939461599680227e-12 0.0003051569675619427 -9.443980748956555e-14 -1.478963505354232e-20 6.90808144208544e-20 -1.0205624064299237e-21; -1.0341887720891794e-26 -3.0512572539489015e-14 -9.4439791640222e-14 0.00015683924558702048 -1.2244322242714451e-16 -1.1441997039933745e-10 2.390827547942153e-19; 8.65516509863998e-20 -2.1894932882467733e-20 5.364253212019478e-21 -1.224432223919581e-16 0.00013009419088534928 1.7066046918283983e-14 -3.06823569127589e-15; 1.1361583893889657e-29 2.2078129314309594e-20 6.909798298956181e-20 -1.144199703979831e-10 1.7066046918283873e-14 0.00015096998518547949 -3.0656881338318256e-13; -2.041296870655662e-30 2.178249320283395e-24 8.540873443305885e-23 2.236103628506436e-19 -3.068235691518662e-15 -3.0656891790834217e-13 0.00012818778455667102])
 Level     Unknowns     NonZeros
 -----     --------     --------
     1        30401       471601 [88.14%]
-    2         3608        45078 [ 8.43%]
-    3         1075        12797 [ 2.39%]
-    4          361         3849 [ 0.72%]
-    5          126         1212 [ 0.23%]
-    6           45          373 [ 0.07%]
-    7           15           95 [ 0.02%]
-    8            6           28 [ 0.01%]
+    2         3585        44745 [ 8.36%]
+    3         1082        12998 [ 2.43%]
+    4          359         3993 [ 0.75%]
+    5          123         1201 [ 0.22%]
+    6           41          339 [ 0.06%]
+    7           16          122 [ 0.02%]
+    8            7           35 [ 0.01%]
 </pre>
 </div>
 
@@ -13912,7 +13838,7 @@ Level     Unknowns     NonZeros
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="c"># use AMG preconditioner in CG</span>
@@ -13932,13 +13858,13 @@ Level     Unknowns     NonZeros
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>6.073510854804933e-7</pre>
+<pre>5.694265174501668e-7</pre>
 </div>
 
 </div>
@@ -13949,7 +13875,7 @@ Level     Unknowns     NonZeros
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span> <span class="n">cg</span><span class="p">(</span><span class="o">$</span><span class="n">A</span><span class="p">,</span> <span class="o">$</span><span class="n">b</span><span class="p">,</span> <span class="n">Pl</span> <span class="o">=</span> <span class="o">$</span><span class="n">pamg</span><span class="p">)</span>
@@ -13965,20 +13891,20 @@ Level     Unknowns     NonZeros
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>BenchmarkTools.Trial: 56 samples with 1 evaluation.
- Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">87.751 ms</span> … <span class="ansi-magenta-fg">94.002 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">89.547 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">89.743 ms</span> ± <span class="ansi-green-fg"> 1.320 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>0.00% ± 0.00%
+<pre>BenchmarkTools.Trial: 59 samples with 1 evaluation.
+ Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">80.789 ms</span> … <span class="ansi-magenta-fg">105.099 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">84.709 ms               </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">85.456 ms</span> ± <span class="ansi-green-fg">  3.928 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>0.09% ± 0.60%
 
-        ▂▂ ▂   ▅   <span class="ansi-blue-fg">█</span>▅<span class="ansi-green-fg"> </span>                                         
-  █▁▁▅▅▁██▁██▅▅███▅<span class="ansi-blue-fg">█</span>█<span class="ansi-green-fg">█</span>█▅▁▅█▁▅█▅▅▁▁▁▅▁█▁▅▁▁▁▁▅▁▁▅▁▁▁▁▁▁▁▁▁▁▁▁▅ ▁
-  87.8 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>        93.9 ms <span class="ansi-bold">&lt;</span>
+         ▂ ▅   ▅  ▅<span class="ansi-blue-fg">▅</span>█ <span class="ansi-green-fg"> </span>      ▂                                  
+  ▅▁█▁▅▅█████▅▅█▅▅█<span class="ansi-blue-fg">█</span>█▅<span class="ansi-green-fg">▁</span>██▅▁▅▁█▁▁▅▁▁▅▅▁▁▁▁▅▅▅▁▁▁▁▁▁▁▅▁▁▁▁▁▁▁▅▁▅ ▁
+  80.8 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>         94.6 ms <span class="ansi-bold">&lt;</span>
 
  Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">951.23 KiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">16</span>.</pre>
 </div>
@@ -14052,13 +13978,13 @@ Level     Unknowns     NonZeros
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Least-squares-example">Least squares example<a class="anchor-link" href="#Least-squares-example">&#182;</a></h4>
+<h3 id="Least-squares-example">Least squares example<a class="anchor-link" href="#Least-squares-example">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">BenchmarkTools</span><span class="p">,</span> <span class="n">IterativeSolvers</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">SparseArrays</span>
@@ -14084,20 +14010,20 @@ Level     Unknowns     NonZeros
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>BenchmarkTools.Trial: 2 samples with 1 evaluation.
- Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">4.538 s</span> … <span class="ansi-magenta-fg"> 4.543 s</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>3.89% … 3.76%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">4.541 s             </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>3.83%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">4.541 s</span> ± <span class="ansi-green-fg">3.646 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>3.83% ± 0.10%
+ Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">4.697 s</span> … <span class="ansi-magenta-fg">   5.306 s</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>3.72% … 3.19%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">5.002 s               </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>3.44%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">5.002 s</span> ± <span class="ansi-green-fg">430.340 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>3.44% ± 0.38%
 
-  <span class="ansi-blue-fg">█</span>                           <span class="ansi-green-fg"> </span>                          █  
-  <span class="ansi-blue-fg">█</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█ ▁
-  4.54 s<span class="ansi-black-intense-fg">        Histogram: frequency by time</span>        4.54 s <span class="ansi-bold">&lt;</span>
+  <span class="ansi-blue-fg">█</span>                            <span class="ansi-green-fg"> </span>                           █  
+  <span class="ansi-blue-fg">█</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁<span class="ansi-green-fg">▁</span>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█ ▁
+  4.7 s<span class="ansi-black-intense-fg">          Histogram: frequency by time</span>         5.31 s <span class="ansi-bold">&lt;</span>
 
  Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">1.55 GiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">184</span>.</pre>
 </div>
@@ -14110,7 +14036,7 @@ Level     Unknowns     NonZeros
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="n">β̂_lsqr</span> <span class="o">=</span> <span class="n">lsqr</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -14140,20 +14066,20 @@ Level     Unknowns     NonZeros
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[14]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>BenchmarkTools.Trial: 105 samples with 1 evaluation.
- Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">43.490 ms</span> … <span class="ansi-magenta-fg">59.592 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 15.73%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">45.936 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">48.017 ms</span> ± <span class="ansi-green-fg"> 4.284 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>4.39% ±  6.80%
+<pre>BenchmarkTools.Trial: 100 samples with 1 evaluation.
+ Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">45.540 ms</span> … <span class="ansi-magenta-fg">66.245 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 13.23%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">48.556 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">50.113 ms</span> ± <span class="ansi-green-fg"> 3.857 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>4.27% ±  6.11%
 
-  ▁▅ ▄██  ▁<span class="ansi-blue-fg"> </span>        <span class="ansi-green-fg"> </span>                                          
-  ██▆███▁▆█<span class="ansi-blue-fg">▅</span>█▁▃▁▅▁▁█<span class="ansi-green-fg">▃</span>▁▃▅▅▆▃▁▁▁▃▁▃▁▁▃▅▃▅▁▆█▃▆▃▃▃▁▃▁▃▅▁▃▁▅▁▁▁▁▃ ▃
-  43.5 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>        58.1 ms <span class="ansi-bold">&lt;</span>
+  ▆  ▂ ▄▄▂█▄  ▄<span class="ansi-blue-fg"> </span>     <span class="ansi-green-fg"> </span> ▂         ▂     ▆                       
+  █▄▆████████▆█<span class="ansi-blue-fg">█</span>▄▁▆▆▁<span class="ansi-green-fg">▆</span>▁█▁▁▄▄▁▄▁▁▄█▁▄▆▆███▄▁▄▁▄▄▆▁▁▁▁▁▁▄▁▁▁▁▁▄ ▄
+  45.5 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>        59.6 ms <span class="ansi-bold">&lt;</span>
 
  Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">16.63 MiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">1724</span>.</pre>
 </div>
@@ -14166,7 +14092,7 @@ Level     Unknowns     NonZeros
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="n">β̂_lsmr</span> <span class="o">=</span> <span class="n">lsmr</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -14196,20 +14122,20 @@ Level     Unknowns     NonZeros
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>BenchmarkTools.Trial: 176 samples with 1 evaluation.
- Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">25.878 ms</span> … <span class="ansi-magenta-fg">67.424 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 13.28%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">26.944 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
- Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">28.423 ms</span> ± <span class="ansi-green-fg"> 4.697 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>2.66% ±  6.75%
+<pre>BenchmarkTools.Trial: 174 samples with 1 evaluation.
+ Range <span class="ansi-black-intense-fg">(</span><span class="ansi-cyan-intense-fg ansi-bold">min</span> … <span class="ansi-magenta-fg">max</span><span class="ansi-black-intense-fg">):  </span><span class="ansi-cyan-intense-fg ansi-bold">26.325 ms</span> … <span class="ansi-magenta-fg">40.718 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>min … max<span class="ansi-black-intense-fg">): </span>0.00% … 20.51%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-blue-intense-fg ansi-bold">median</span><span class="ansi-black-intense-fg">):     </span><span class="ansi-blue-intense-fg ansi-bold">27.991 ms              </span><span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>median<span class="ansi-black-intense-fg">):    </span>0.00%
+ Time  <span class="ansi-black-intense-fg">(</span><span class="ansi-green-intense-fg ansi-bold">mean</span> ± <span class="ansi-green-fg">σ</span><span class="ansi-black-intense-fg">):   </span><span class="ansi-green-intense-fg ansi-bold">28.846 ms</span> ± <span class="ansi-green-fg"> 2.579 ms</span>  <span class="ansi-black-intense-fg">┊</span> GC <span class="ansi-black-intense-fg">(</span>mean ± σ<span class="ansi-black-intense-fg">):  </span>2.47% ±  6.16%
 
-  ▄▇█<span class="ansi-blue-fg">▇</span>▅▄▂▃<span class="ansi-green-fg"> </span>                                                    
-  ███<span class="ansi-blue-fg">█</span>████<span class="ansi-green-fg">█</span>▆▅▅▅▁▁▅▆▅▅▁▁▁▁▁▁▁▅▁▁▅▅███▁▁▁▅▁▁▁▁▁▁▁▁▅▁▁▁▁▁▁▁▁▁▁▁▅ ▅
-  25.9 ms<span class="ansi-black-intense-fg">      </span><span class="ansi-black-intense-fg">Histogram: </span><span class="ansi-black-intense-fg ansi-bold">log(</span><span class="ansi-black-intense-fg">frequency</span><span class="ansi-black-intense-fg ansi-bold">)</span><span class="ansi-black-intense-fg"> by time</span>      44.2 ms <span class="ansi-bold">&lt;</span>
+  ▄▃▂▅▄█▅▅▃<span class="ansi-blue-fg">▄</span>  ▃▄<span class="ansi-green-fg"> </span>                                              
+  █████████<span class="ansi-blue-fg">█</span>█▇██<span class="ansi-green-fg">▇</span>▅▄▁▅▃▃▅▆▃▄▄▄▃▃▃▃▃▁▁▁▁▃▁▁▁▃▄▁▁▃▅▄▁▃▄▁▁▁▃▃▁▁▁▄ ▃
+  26.3 ms<span class="ansi-black-intense-fg">         Histogram: frequency by time</span>        36.7 ms <span class="ansi-bold">&lt;</span>
 
  Memory estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">5.54 MiB</span>, allocs estimate<span class="ansi-black-intense-fg">: </span><span class="ansi-yellow-fg">708</span>.</pre>
 </div>
@@ -14223,7 +14149,7 @@ Level     Unknowns     NonZeros
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Use-LinearMaps-in-iterative-solvers">Use LinearMaps in iterative solvers<a class="anchor-link" href="#Use-LinearMaps-in-iterative-solvers">&#182;</a></h4><p>In many applications, it is advantageous to define linear maps indead of forming the actual (sparse) matrix. For a linear map, we need to specify how it acts on right- and left-multiplication on a vector. The <a href="https://github.com/Jutho/LinearMaps.jl"><code>LinearMaps.jl</code></a> package is exactly for this purpose and interfaces nicely with <code>IterativeSolvers.jl</code>, <code>Arnoldi.jl</code> and other iterative solver packages.</p>
+<h3 id="Use-LinearMaps-in-iterative-solvers">Use LinearMaps in iterative solvers<a class="anchor-link" href="#Use-LinearMaps-in-iterative-solvers">&#182;</a></h3><p>In many applications, it is advantageous to define linear maps indead of forming the actual (sparse) matrix. For a linear map, we need to specify how it acts on right- and left-multiplication on a vector. The <a href="https://github.com/Jutho/LinearMaps.jl"><code>LinearMaps.jl</code></a> package is exactly for this purpose and interfaces nicely with <code>IterativeSolvers.jl</code>, <code>Arnoldi.jl</code> and other iterative solver packages.</p>
 <p>Applications:</p>
 <ol>
 <li>The matrix is not sparse but admits special structure, e.g., easy + low rank (PageRank), Kronecker proudcts, etc.  </li>
@@ -14237,7 +14163,7 @@ Level     Unknowns     NonZeros
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">LinearMaps</span><span class="p">,</span> <span class="n">IterativeSolvers</span>
@@ -14278,7 +14204,7 @@ Level     Unknowns     NonZeros
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[17]:</div>
+    <div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -14303,7 +14229,7 @@ Level     Unknowns     NonZeros
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="nd">@show</span> <span class="n">size</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -14347,7 +14273,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="kt">Matrix</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -14363,7 +14289,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[19]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -14414,7 +14340,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">SparseArrays</span>
@@ -14431,7 +14357,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt output_prompt">Out[19]:</div>
 
 
 
@@ -14468,7 +14394,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">UnicodePlots</span>
@@ -14485,7 +14411,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -14534,7 +14460,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">Arpack</span>
@@ -14551,7 +14477,19 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[22]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>┌ Info: Precompiling Arpack [7d9fca2a-8960-54d3-9f78-7d1dccf2cb97]
+└ @ Base loading.jl:1423
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
 
 
 
@@ -14568,7 +14506,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span>
@@ -14586,7 +14524,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[23]:</div>
+    <div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -14637,7 +14575,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-julia"><pre><span></span><span class="n">Arpack</span><span class="o">.</span><span class="n">eigs</span><span class="p">(</span><span class="n">D</span><span class="o">&#39;</span><span class="n">D</span><span class="p">,</span> <span class="n">nev</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">which</span><span class="o">=:</span><span class="n">LM</span><span class="p">)</span>
@@ -14653,7 +14591,7 @@ D&#39; * v = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[24]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
