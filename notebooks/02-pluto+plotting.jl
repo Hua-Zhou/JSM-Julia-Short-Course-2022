@@ -26,6 +26,9 @@ using Plots
 # ╔═╡ d317df8f-1834-4977-85a4-1fd13f403430
 using OnlineStats, RDatasets
 
+# ╔═╡ 857302ee-e2cc-4589-9c56-9d9c3c138df3
+using RecipesBase
+
 # ╔═╡ bb277fc2-0e1f-11ed-1bd1-77c13c58d6b8
 md"""
 # What is Pluto?
@@ -88,6 +91,18 @@ let
 	scatter(cumsum(randn(slider)), label="$slider points")
 end
 
+# ╔═╡ 3be4ffe0-5918-4759-81de-8ab5262b5ab4
+md"## Live Documentation"
+
+# ╔═╡ 27097147-df4f-40c3-a846-a10ae65e4d9c
+md"""
+- Open "Live docs" on the bottom right.
+"""
+
+# ╔═╡ 79ced2ad-380a-4ff4-bbf1-b0b6269f3231
+# Start typing code here
+
+
 # ╔═╡ bebb7300-bfaa-4600-92a0-3af274ab42db
 md"""
 # Plotting in Julia
@@ -120,7 +135,7 @@ UnicodePlots.surfaceplot(-8:.5:8, -8:.5:8, sombrero, colormap=:jet)
 PlutoUI.LocalResource("../assets/unicodeplots.png")
 
 # ╔═╡ e10e26cf-72ea-4f7d-b7c6-13b727627a22
-
+PlutoUI.LocalResource("../assets/makie_vs_plots.png")
 
 # ╔═╡ 4adb22f1-b96b-421d-81e9-fa1757aa5166
 let
@@ -226,6 +241,54 @@ let
 	plot(o, title="Neat!")
 end
 
+# ╔═╡ a3198d5a-4322-4af1-ada6-d54d17d94fe9
+md"# Showing off your Types"
+
+# ╔═╡ 781ead79-19ff-4dea-8537-e70b0bc0d616
+md"""
+- If you create your own types, you may want to change how **Pluto** displays it (or how **Plots** plots it).
+- Here we'll look at `Base.show` (for **Pluto**) and `@recipe` (for **Plots**).
+"""
+
+# ╔═╡ 4dcfbab3-08bf-4a1d-8d92-186e7eb55c92
+begin
+struct Circle 
+	r::Float64
+end
+
+function Base.show(io::IO, M::MIME"text/html", o::Circle)
+	d = 2 * o.r
+	show(io, M, HTML("""
+	<div style="
+		height:$(d)px; 
+		width:$(d)px; 
+		background-color: skyblue; 
+		border-radius:50%";
+	>
+	"""))
+end
+end
+
+# ╔═╡ 7a3d880a-a4aa-4a7b-b453-8c1b9e2267ea
+@bind radius Slider(1:200)
+
+# ╔═╡ 99d8bdd6-2b4a-496a-8c1c-5479e044a8d2
+Circle(radius)
+
+# ╔═╡ 8790f4b7-7f51-4a55-8b69-4da561177cbf
+@recipe function f(o::Circle)
+	x = o.r .* cos.(range(0, 2pi, 100))
+	y = o.r .* sin.(range(0, 2pi, 100))
+	aspect_ratio --> :equal
+	fillto --> 0
+	color --> :skyblue
+	linewidth --> 0
+	x, y
+end
+
+# ╔═╡ c190217f-828a-4425-af2e-4948583ab720
+plot(Circle(10))
+
 # ╔═╡ d7ac6748-132a-4400-91bb-52fea7a9a167
 begin
 	function highlight(text)
@@ -293,6 +356,7 @@ highlight(md"""
 - Powerful plotting with multiple backends.
 - **Many features**: Interactive widgets, animations, advanced layouts, etc.
 - Long loading time, so we will skip examples.
+- Makie *is* beginning to overtake Plots as the de facto plotting library. 
 """)
 
 # ╔═╡ 9e3b49cc-0dbf-4370-8a33-2c53c9bd1f08
@@ -316,6 +380,24 @@ highlight(md"""
 - Keyword arguments are _**attributes**_.
 """)
 
+# ╔═╡ 91c4003e-9125-40f0-aa92-a44283cfbcc4
+highlight(md"""
+- Customize how **Pluto** displays an object by defining a method for:
+
+```julia
+Base.show(::IO, ::MIME"text/html", ::MyType)
+```
+
+- use `::MIME"text/plain"` to change how it displays in the *REPL*.
+""")
+
+# ╔═╡ f4bbd4ea-ed64-4b4b-bea8-95196ac5b857
+highlight(md"""
+- Customize how **Plots** plots your type by using `RecipesBase.@recipe`.
+- Set *attributes** with `-->`. (forced set with `:=`)
+- The function should return the *input data*.
+""")
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -324,6 +406,7 @@ PlotlyLight = "ca7969ec-10b3-423e-8d99-40f33abb42bf"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 RDatasets = "ce6b1742-4840-55fa-b093-852dadbb1d8b"
+RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
 UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
 
 [compat]
@@ -332,6 +415,7 @@ PlotlyLight = "~0.5.0"
 Plots = "~1.31.4"
 PlutoUI = "~0.7.39"
 RDatasets = "~0.7.7"
+RecipesBase = "~1.2.1"
 UnicodePlots = "~3.0.4"
 """
 
@@ -1538,14 +1622,17 @@ version = "0.9.1+5"
 # ╠═e5a4e01b-3e46-4466-a750-023fc01c7d48
 # ╠═2075deb9-80a7-414b-9971-e4f61cbc494b
 # ╟─6c829cb9-5f1b-40fc-b932-240d96f0e5bc
+# ╟─3be4ffe0-5918-4759-81de-8ab5262b5ab4
+# ╟─27097147-df4f-40c3-a846-a10ae65e4d9c
+# ╠═79ced2ad-380a-4ff4-bbf1-b0b6269f3231
 # ╟─bebb7300-bfaa-4600-92a0-3af274ab42db
 # ╟─96521f3f-091b-4707-89a2-8616696dec44
 # ╠═83ff62d3-35f6-45ec-9401-2daa73b711c4
 # ╠═c8f5ae9b-211b-470b-9feb-780b4b16e0b0
 # ╟─2cb4dcf7-d2df-4568-848a-7e21912354e1
 # ╟─3c2a3b7e-b89f-4bbe-8a5f-daeb72fcc88e
-# ╠═0ba0d525-dd3a-448c-a321-95587f9a4549
-# ╠═e10e26cf-72ea-4f7d-b7c6-13b727627a22
+# ╟─0ba0d525-dd3a-448c-a321-95587f9a4549
+# ╟─e10e26cf-72ea-4f7d-b7c6-13b727627a22
 # ╟─9e3b49cc-0dbf-4370-8a33-2c53c9bd1f08
 # ╠═8a7d7042-ae1b-476d-b77d-dfb54fb939bc
 # ╠═4adb22f1-b96b-421d-81e9-fa1757aa5166
@@ -1571,6 +1658,16 @@ version = "0.9.1+5"
 # ╠═d317df8f-1834-4977-85a4-1fd13f403430
 # ╠═fb751a17-1992-43a9-9135-ba2cf1d51a50
 # ╠═b1a3a33c-6bb1-4ab6-a18b-f3d461819f62
+# ╟─a3198d5a-4322-4af1-ada6-d54d17d94fe9
+# ╟─781ead79-19ff-4dea-8537-e70b0bc0d616
+# ╟─91c4003e-9125-40f0-aa92-a44283cfbcc4
+# ╠═4dcfbab3-08bf-4a1d-8d92-186e7eb55c92
+# ╠═7a3d880a-a4aa-4a7b-b453-8c1b9e2267ea
+# ╠═99d8bdd6-2b4a-496a-8c1c-5479e044a8d2
+# ╟─f4bbd4ea-ed64-4b4b-bea8-95196ac5b857
+# ╠═857302ee-e2cc-4589-9c56-9d9c3c138df3
+# ╠═8790f4b7-7f51-4a55-8b69-4da561177cbf
+# ╠═c190217f-828a-4425-af2e-4948583ab720
 # ╟─d7ac6748-132a-4400-91bb-52fea7a9a167
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

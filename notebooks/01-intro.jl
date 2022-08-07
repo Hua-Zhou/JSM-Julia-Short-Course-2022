@@ -225,18 +225,7 @@ r"[a-z]"  # I'm a Regex!
 html"<span style='color:red'>I'm html</span>"  # I'm HTML!
 
 # ╔═╡ 81d393be-6217-4301-83f4-da31c86bfa32
-begin
-	file = joinpath(tempdir(), "image.png")
-	
-	# And this is R!
-	R"""
-	png(file=$file)
-	hist(rnorm(1000))
-	dev.off()
-	"""
-	
-	PlutoUI.LocalResource(file)
-end
+R"rnorm(5)"  # I'm R!
 
 # ╔═╡ a9470098-c2bb-4bd6-8d91-7a5a197e11f9
 md"# Installing Packages/REPL Modes"
@@ -340,7 +329,7 @@ highlight(md"Everything in Julia has a *type*.")
 typeof(1)
 
 # ╔═╡ 30445a9b-1352-4fc6-8f10-de6b2f438580
-highlight(md"Types can be *parameterized*")
+highlight(md"Types can be *parameterized* by other types.")
 
 # ╔═╡ fdc7c1a8-6cbe-470c-a764-bc9954b046d6
 typeof(rand(2))
@@ -491,7 +480,7 @@ highlight(md"""
 """)
 
 # ╔═╡ 0ea9966d-89f4-436a-8a71-f499305873df
-dist = Normal(50,20) # Try changing this!
+dist = Normal(20,30) # Try changing this!
 
 # ╔═╡ 1dc210d4-fd42-4804-ad56-5cd2879875b5
 begin
@@ -518,6 +507,59 @@ highlight(md"""
 
 > Your language influences/determines how you think.
 """)
+
+# ╔═╡ 27ab72f3-4e13-40ca-bbdf-61d220028239
+md"# Macros"
+
+# ╔═╡ fd8ce95d-0861-4626-891f-142a8966661d
+highlight(md"""
+A *macro* is a **function of an Expression**.  
+
+Macros can change the expression before it is evaluated.
+""")
+
+# ╔═╡ a333f6a8-729a-406f-bdff-112189cf634e
+@show x;
+
+# ╔═╡ 04fd5b08-19d4-4dd9-b5d7-e24f503db227
+show(x)
+
+# ╔═╡ 4df8a997-eb47-452a-9129-ca9a03958530
+md"""
+- Q: What is the difference between `@show` and `show`?
+- A: `@show` has access to the expression `x` and not just its value (`[1, 2, 3, 4]`).
+"""
+
+# ╔═╡ 9bf16978-bf6d-4dc6-8ce9-9b75943fb711
+highlight(md"""
+- `@time` is an indispensable tool for finding performance hangups.  
+- Keep an eye on your allocations!
+""")
+
+# ╔═╡ 740db699-c95a-49f0-b049-910d49a65bbc
+function slow_and_bad()
+	x = rand(10)
+	for i in 1:10
+		sleep(.1)
+		x = rand([1, 1.0, "hi", 'a'])
+	end
+	x
+end
+
+# ╔═╡ e7d10c5a-bb19-4978-b1be-f4fd65a41389
+@time slow_and_bad();
+
+# ╔═╡ 646f9dad-5599-45ca-84a4-70ca01656ef5
+function fast_and_good()
+	x = rand()
+	for i in 1:10
+		x += 1.0
+	end
+	x
+end
+
+# ╔═╡ 64113218-a276-456a-97e5-f96adba6e5f4
+@time fast_and_good();
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1870,8 +1912,8 @@ version = "0.9.1+5"
 # ╠═5bc35374-ce50-4822-b353-0b4c4eafa708
 # ╟─f99250f9-9148-426c-8927-ed90343305fb
 # ╟─fb7c3491-264e-4b2d-97ca-06d3a44462da
-# ╠═1120cc7d-6a8f-4fcc-898e-31259250723c
-# ╠═c0a1cd37-7f51-4ec5-bf61-03fa751e434a
+# ╟─1120cc7d-6a8f-4fcc-898e-31259250723c
+# ╟─c0a1cd37-7f51-4ec5-bf61-03fa751e434a
 # ╠═05536375-be9c-42a7-ab48-2f1299437911
 # ╠═8c285d3f-f688-4255-8b6f-6dfbb22afac1
 # ╠═91d55818-5908-4d53-93ac-0c34a4548a7a
@@ -1881,9 +1923,19 @@ version = "0.9.1+5"
 # ╠═4fd5020a-c66c-4e41-be71-59c6aebc2918
 # ╟─71a4df97-3f50-43a4-abc7-f782dbc0e359
 # ╠═0ea9966d-89f4-436a-8a71-f499305873df
-# ╠═1dc210d4-fd42-4804-ad56-5cd2879875b5
+# ╟─1dc210d4-fd42-4804-ad56-5cd2879875b5
 # ╟─b49d1a7b-80dd-4f90-9d03-22f3698f3f12
 # ╟─f2cf21e2-62ac-4b46-bc5f-96a869323760
+# ╟─27ab72f3-4e13-40ca-bbdf-61d220028239
+# ╟─fd8ce95d-0861-4626-891f-142a8966661d
+# ╠═a333f6a8-729a-406f-bdff-112189cf634e
+# ╠═04fd5b08-19d4-4dd9-b5d7-e24f503db227
+# ╟─4df8a997-eb47-452a-9129-ca9a03958530
+# ╟─9bf16978-bf6d-4dc6-8ce9-9b75943fb711
+# ╠═740db699-c95a-49f0-b049-910d49a65bbc
+# ╠═e7d10c5a-bb19-4978-b1be-f4fd65a41389
+# ╠═646f9dad-5599-45ca-84a4-70ca01656ef5
+# ╠═64113218-a276-456a-97e5-f96adba6e5f4
 # ╟─a5b5875e-85e9-4729-9675-4900af676f7d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
