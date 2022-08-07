@@ -49,6 +49,9 @@ USER root
 RUN fix-permissions $JULIA_DEFAULT_ENV /opt/julia-${JULIA_VERSION}
 USER ${NB_UID}
 
+# this is necessary to avoid curl error 60 when using MatrixDepot.jl
+RUN echo "insecure" >> ~/.curlrc
+
 # Install and precompile packages
 RUN julia --threads 4 /opt/julia-${JULIA_VERSION}/install-packages.jl && \
     rm -rf "${HOME}/.local" && \ 
