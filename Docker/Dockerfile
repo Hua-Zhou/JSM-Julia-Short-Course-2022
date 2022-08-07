@@ -1,5 +1,5 @@
 # docker build . -t kose/jsm2022-julia-short-course
-# docker run -it -p 8888:8888 -v /Users/huazhou/Documents/Box\ Sync/MIMIC/mimic-iv-1.0:/srv/mimic-iv huazhou/lange_symposium_workshop_2022
+# docker run -it -p 8888:8888 kose/jsm2022-julia-short-course
 # docker-compose up
 
 # https://github.com/jupyter/docker-stacks/blob/master/datascience-notebook/Dockerfile
@@ -19,16 +19,24 @@ RUN arch=$(uname -m) && \
         export G_SLICE=always-malloc; \
     fi && \
     mamba install --quiet --yes \
-    'nbgitpuller' && \
+    'nbgitpuller' \
+    'r-bench' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
-
 
 # Setup julia
 
 USER root
 COPY install-packages.jl /opt/julia-${JULIA_VERSION}/
+## add some Linux dependencies
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    libpixman-1-0 \
+    libpixman-1-dev \
+    p7zip-full \
+    p7zip-rar && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
 ENV JULIA_DEFAULT_ENV="${JULIA_DEPOT_PATH}/environments/v1.7"
@@ -40,6 +48,9 @@ COPY Project.toml $JULIA_DEFAULT_ENV
 USER root
 RUN fix-permissions $JULIA_DEFAULT_ENV /opt/julia-${JULIA_VERSION}
 USER ${NB_UID}
+
+# this is necessary to avoid curl error 60 when using MatrixDepot.jl
+RUN echo "insecure" >> ~/.curlrc
 
 # Install and precompile packages
 RUN julia --threads 4 /opt/julia-${JULIA_VERSION}/install-packages.jl && \
