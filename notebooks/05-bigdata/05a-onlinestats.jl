@@ -10,9 +10,6 @@ using Plots, OnlineStats
 # ╔═╡ 800a1b58-000b-4584-a757-442e1410ffbb
 using Serialization
 
-# ╔═╡ 662418c4-dbbd-4047-b1e7-4f813a0af790
-using FileTrees
-
 # ╔═╡ cacfbea3-1c2f-4723-84af-a92463fbed12
 begin
 	using PlutoUI
@@ -326,32 +323,15 @@ begin
 	plot(stat, title="Histogram of $(nobs(stat)) observations")
 end
 
-# ╔═╡ 6483286b-c568-4b32-b87d-c6175dc260d6
-md"# FileTrees.jl"
-
-# ╔═╡ 24b1f178-3152-4011-ba38-a21139457908
-
-
-# ╔═╡ 574f6740-8a7a-4a70-96fb-77d7028067d2
-stocks = "/Users/joshday/datasets/stockdata/Stocks/"
-
-# ╔═╡ 9e0b44fe-1eff-48c0-95be-5ba44a762f99
-tree = FileTree(stocks)
-
-# ╔═╡ 406f2153-d633-4cca-a93d-7601a5b62c10
-
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-FileTrees = "72696420-646e-6120-6e77-6f6420746567"
 OnlineStats = "a15396b6-48d5-5d58-9928-6d29437db91e"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
 [compat]
-FileTrees = "~0.3.7"
 OnlineStats = "~1.5.13"
 Plots = "~1.31.6"
 PlutoUI = "~0.7.39"
@@ -454,22 +434,10 @@ version = "3.45.0"
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 
-[[deps.ContextVariablesX]]
-deps = ["Compat", "Logging", "UUIDs"]
-git-tree-sha1 = "8ccaa8c655bc1b83d2da4d569c9b28254ababd6e"
-uuid = "6add18c4-b38d-439d-96f6-d6bc489c04c5"
-version = "0.1.2"
-
 [[deps.Contour]]
 git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.6.2"
-
-[[deps.Dagger]]
-deps = ["Colors", "ContextVariablesX", "Distributed", "LinearAlgebra", "MacroTools", "MemPool", "Profile", "Random", "Requires", "Serialization", "SharedArrays", "SparseArrays", "Statistics", "StatsBase", "UUIDs"]
-git-tree-sha1 = "9b67559302a5137bb48be79c5452358cac0c3b70"
-uuid = "d58978e5-989f-55fb-8d15-ea34adc7bf54"
-version = "0.16.1"
 
 [[deps.DataAPI]]
 git-tree-sha1 = "fb5f5316dd3fd4c5e7c30a24d50643b73e37cd40"
@@ -537,18 +505,6 @@ deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers",
 git-tree-sha1 = "ccd479984c7838684b3ac204b716c89955c76623"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.2+0"
-
-[[deps.FilePathsBase]]
-deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
-git-tree-sha1 = "129b104185df66e408edd6625d480b7f9e9823a0"
-uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
-version = "0.9.18"
-
-[[deps.FileTrees]]
-deps = ["AbstractTrees", "Dagger", "FilePathsBase", "Glob"]
-git-tree-sha1 = "c9cef150e828fbe83e75314b657491994f990d9a"
-uuid = "72696420-646e-6120-6e77-6f6420746567"
-version = "0.3.7"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -624,11 +580,6 @@ deps = ["Artifacts", "Gettext_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Libic
 git-tree-sha1 = "a32d672ac2c967f3deb8a81d828afc739c838a06"
 uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
 version = "2.68.3+2"
-
-[[deps.Glob]]
-git-tree-sha1 = "4df9f7e06108728ebf00a0a11edee4b29a482bb2"
-uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
-version = "1.3.0"
 
 [[deps.Graphite2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -859,12 +810,6 @@ git-tree-sha1 = "e498ddeee6f9fdb4551ce855a46f54dbd900245f"
 uuid = "442fdcdd-2543-5da2-b0f3-8c86c306513e"
 version = "0.3.1"
 
-[[deps.MemPool]]
-deps = ["DataStructures", "Distributed", "Mmap", "Random", "Serialization", "Sockets"]
-git-tree-sha1 = "303f55cede4947d0acb325ac0bd7595fbcad6b99"
-uuid = "f9f48841-c794-520a-933b-121f7ba6ed94"
-version = "0.4.2"
-
 [[deps.Missings]]
 deps = ["DataAPI"]
 git-tree-sha1 = "bf210ce90b6c9eed32d25dbcae1ebc565df2687f"
@@ -990,10 +935,6 @@ version = "1.3.0"
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
-
-[[deps.Profile]]
-deps = ["Printf"]
-uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 
 [[deps.Qt5Base_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Fontconfig_jll", "Glib_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "OpenSSL_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libxcb_jll", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_keysyms_jll", "Xorg_xcb_util_renderutil_jll", "Xorg_xcb_util_wm_jll", "Zlib_jll", "xkbcommon_jll"]
@@ -1443,12 +1384,6 @@ version = "1.4.1+0"
 # ╠═800a1b58-000b-4584-a757-442e1410ffbb
 # ╠═379676e4-4edf-44f9-b515-7013e5a38de9
 # ╠═c633679f-8b82-4479-abe5-25b3acb1d927
-# ╟─6483286b-c568-4b32-b87d-c6175dc260d6
-# ╠═24b1f178-3152-4011-ba38-a21139457908
-# ╠═662418c4-dbbd-4047-b1e7-4f813a0af790
-# ╠═574f6740-8a7a-4a70-96fb-77d7028067d2
-# ╠═9e0b44fe-1eff-48c0-95be-5ba44a762f99
-# ╠═406f2153-d633-4cca-a93d-7601a5b62c10
-# ╠═cacfbea3-1c2f-4723-84af-a92463fbed12
+# ╟─cacfbea3-1c2f-4723-84af-a92463fbed12
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
