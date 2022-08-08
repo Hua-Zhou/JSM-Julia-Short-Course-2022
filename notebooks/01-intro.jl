@@ -373,7 +373,7 @@ Remember to think of abstract types as a _**set**_.
 
 # ╔═╡ d40f41ae-290c-4c2b-a836-7e125389a6f8
 function f(x::Real)
-	return x / 2
+	return x / 2  # typing `return` is optional
 end
 
 # ╔═╡ c9dfa1f0-106f-4e30-8509-ce71bf767d41
@@ -470,15 +470,6 @@ function myquantile(dist, q)
     x
 end
 
-# ╔═╡ 71a4df97-3f50-43a4-abc7-f782dbc0e359
-highlight(md"""
-### It works out of the box!
-
-- **Important Note:** We have not told julia what `dist` or `q` are!
-- As long as `dist` has methods for `mean`, `cdf`, and `pdf`, this function will work!
-- And we get specialized methods for each different type of `dist`!
-""")
-
 # ╔═╡ 0ea9966d-89f4-436a-8a71-f499305873df
 dist = Normal(20,30) # Try changing this!
 
@@ -494,6 +485,15 @@ begin
 	plot(p1, plot(dist; xlab="x", label="", title="Distribution"); layout=(2,1), 
 		size=(750,600), xlim)
 end
+
+# ╔═╡ 71a4df97-3f50-43a4-abc7-f782dbc0e359
+highlight(md"""
+### It works out of the box!
+
+- **Important Note:** We have not told julia what `dist` or `q` are!
+- As long as `dist` has methods for `mean`, `cdf`, and `pdf`, this function will work!
+- And we get specialized methods for each different type of `dist`!
+""")
 
 # ╔═╡ b49d1a7b-80dd-4f90-9d03-22f3698f3f12
 md"""## How would you write this function in R?
@@ -541,7 +541,7 @@ function slow_and_bad()
 	x = rand(10)
 	for i in 1:10
 		sleep(.1)
-		x = rand([1, 1.0, "hi", 'a'])
+		x = rand([1, 1.0, "hi", 'a'])  # Type of `x` is unstable!
 	end
 	x
 end
@@ -1921,9 +1921,9 @@ version = "0.9.1+5"
 # ╟─e1875b71-cb90-4662-9590-4abbb79c3c29
 # ╟─346b5b47-44c6-4068-a395-45b071f01a14
 # ╠═4fd5020a-c66c-4e41-be71-59c6aebc2918
-# ╟─71a4df97-3f50-43a4-abc7-f782dbc0e359
 # ╠═0ea9966d-89f4-436a-8a71-f499305873df
 # ╟─1dc210d4-fd42-4804-ad56-5cd2879875b5
+# ╟─71a4df97-3f50-43a4-abc7-f782dbc0e359
 # ╟─b49d1a7b-80dd-4f90-9d03-22f3698f3f12
 # ╟─f2cf21e2-62ac-4b46-bc5f-96a869323760
 # ╟─27ab72f3-4e13-40ca-bbdf-61d220028239
