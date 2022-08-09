@@ -67,9 +67,11 @@ We provide a server where you can run tutorials (Pluto or Jupyter notebooks) dur
     - Dr. Hua Zhou
     - Xinkai Zhou
 
-2. In JupyterLab, avoid running many kernels at the same time. Promptly shut down the kernels you don't use.
+2. Slack users can join the [channel](https://join.slack.com/share/enQtMzg5OTI0ODkzMzgzMS1lODY1MmYxZjZmMjc0MzkxODM5ZmYzMGI5ZmYyYjA4MDdhNmEwNDI2YzJlMjk0NTI5NzNjMThjODQyMzFhMDUx) to post question or ask for help. 
 
-3. If your kernel dies, most likely you have used more resource than allocated (1 CPU core and 3.6 GB memory). Make sure that you shut down the kernels not in use and try again. Remember that running the tutorials is optional. You can always read the static slides if the server is not responding. We plan to make the workshop materials available to you after the workshop, so you can try again later.
+3. In JupyterLab, avoid running many kernels at the same time. Promptly shut down the kernels you don't use.
+
+4. If your kernel dies, most likely you have used more resource than allocated (1 CPU core and 3.6 GB memory). Make sure that you shut down the kernels not in use and try again. Remember that running the tutorials is optional. You can always read the static slides if the server is not responding. We plan to make the workshop materials available to you after the workshop, so you can try again later.
 
 ## Run Jupyter/Pluto notebooks on your own laptop
 
