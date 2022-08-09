@@ -71,7 +71,7 @@ md"""
 html"<img src='https://avatars.githubusercontent.com/u/2761531?s=200&v=4' style='height:128px'/>"
 
 # ╔═╡ f76388d2-efd2-4b33-9342-369d44e8e2be
-md"## Formulas"
+md"## Formulas with StatsModels.jl"
 
 # ╔═╡ 2d128679-98f6-401c-8cba-180b4a786c49
 md"""
@@ -95,7 +95,10 @@ The **StatsModels** formula syntax is similar to R's formula.
 mpg = dataset("ggplot2", "mpg")
 
 # ╔═╡ 71687ca4-f522-4dce-ac10-997839affbd1
-f = @formula log(Hwy) ~ 1 + Displ * Cyl;
+f = @formula log(Hwy) ~ 1 + Displ * Cyl
+
+# ╔═╡ f1531dd8-8c46-4106-ab2b-488f2676c34a
+X = modelmatrix(f, mpg)
 
 # ╔═╡ 8bfc1f5e-6aaa-45fa-96f6-81cf46e8f1a9
 md"## Generalized Linear Models with GLM.jl"
@@ -107,7 +110,11 @@ highlight("This looks much like R:")
 linreg = lm(f, mpg)
 
 # ╔═╡ 10e38320-a5dc-44d0-afef-74a8378c0f39
-scatter(log.(mpg.Hwy) - fitted(linreg))
+let 
+	p = scatter(log.(mpg.Hwy) - fitted(linreg), lab="y - yhat", title="residual plot")
+	hline!(p, [0], lab="")
+	p
+end
 
 # ╔═╡ 39eb6ee5-c5d8-40ff-9f0e-26866069f96b
 md"## MLJ.jl"
@@ -120,12 +127,15 @@ import MLJ
 
 # ╔═╡ fe52c842-e05a-4dad-8e46-88c255706cc9
 highlight(md"""
-- Impressive effort (with many sponsors) for Machine Learning in Julia.
+- A **very impressive effort** (with many sponsors) for Machine Learning in Julia!
 - Brings together many models from many packages!
 """)
 
 # ╔═╡ 73ad8cf7-1d5f-4f97-bd47-2a220a4681c0
 MLJ.models()
+
+# ╔═╡ 827156ec-12ed-443b-b5d2-99a220bc5583
+MLJ.models("regressor")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1513,6 +1523,7 @@ version = "1.4.1+0"
 # ╠═415133bd-1ae4-4b6b-8acf-4da4f2ef9e20
 # ╠═9a47ea40-3cd7-476b-aa70-cf66a042530b
 # ╠═71687ca4-f522-4dce-ac10-997839affbd1
+# ╠═f1531dd8-8c46-4106-ab2b-488f2676c34a
 # ╟─8bfc1f5e-6aaa-45fa-96f6-81cf46e8f1a9
 # ╠═8d9ee6c1-d0d7-464a-90c2-5e723f98c976
 # ╟─b02aea36-1d2d-4154-a3bc-2b6ecee8b2fc
@@ -1524,6 +1535,7 @@ version = "1.4.1+0"
 # ╠═d174ac2d-095c-495c-97e9-cf2a85e00d60
 # ╟─fe52c842-e05a-4dad-8e46-88c255706cc9
 # ╠═73ad8cf7-1d5f-4f97-bd47-2a220a4681c0
+# ╠═827156ec-12ed-443b-b5d2-99a220bc5583
 # ╟─373b5f0c-de67-4218-bd19-d86cfe89dd99
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
