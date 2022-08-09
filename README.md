@@ -14,9 +14,9 @@ This repo contains the materials for the short course [Julia for Data Science an
 
 | Time | Topic | Presenter |
 |:-----------|:------------|:------------|
-| 8:30-9:00 | Introduction \[[html]()\] | Dr. Josh Day |
-| 9:00-9:30 | Pluto & Plotting \[[html]()\] | Dr. Josh Day |
-| 9:30-10:00 | DataFrames \[[html]()\] | Dr. Josh Day |
+| 8:30-9:00 | Introduction \[[html](https://joshday.github.io/hosted_html/01-intro.jl.html)\] | Dr. Josh Day |
+| 9:00-9:30 | Pluto & Plotting \[[html](https://joshday.github.io/hosted_html/02-pluto+plotting.jl.html)\] | Dr. Josh Day |
+| 9:30-10:00 | DataFrames \[[html](https://joshday.github.io/hosted_html/03-dataframes.jl.html)\] | Dr. Josh Day |
 | 10:00-10:15 | Q&A, exercises | Participants |
 
 ### Mid-morning break: 10:15am-10:30am
@@ -25,8 +25,8 @@ This repo contains the materials for the short course [Julia for Data Science an
 
 | Time | Topic | Presenter |
 |:-----------|:------------|:------------|
-| 10:30-11:00 | Statistical Modeling \[[html]()\] | Dr. Josh Day |
-| 11:00-11:30 | Big Data \[[html]()\] | Dr. Josh Day |
+| 10:30-11:00 | Statistical Modeling \[[html](https://joshday.github.io/hosted_html/04-statsmodels.jl.html)\] | Dr. Josh Day |
+| 11:00-11:30 | Big Data \[[html](https://joshday.github.io/hosted_html/05a-onlinestats.jl.html)\] | Dr. Josh Day |
 | 11:30-12:15 | R vs Python vs Julia vs C/C++ \[[html](https://hua-zhou.github.io/JSM-Julia-Short-Course-2022/notebooks/06-langs/06-langs.html)\] | Dr. Hua Zhou |
 | 12:15-12:30 | Q&A, exercises | Participants |
 
@@ -36,8 +36,8 @@ This repo contains the materials for the short course [Julia for Data Science an
 
 | Time | Topic | Presenter |
 |:-----------|:------------|:------------|
-| 2:00-2:30 | Numerical linear algebra: BLAS/LAPACK \[[html](https://hua-zhou.github.io/JSM-Julia-Short-Course-2022/notebooks/07-numlinalg/07-numlinalg.html)\] | Dr. Hua Zhou |  
-| 2:30-3:00 | Numerical linear algebra: iterative algorithms \[[html](https://hua-zhou.github.io/JSM-Julia-Short-Course-2022/notebooks/08-iter/08-cg.html)\] | Dr. Hua Zhou |  
+| 2:00-2:30 | Numerical linear algebra: BLAS/LAPACK \[[html](https://hua-zhou.github.io/JSM-Julia-Short-Course-2022/notebooks/07-numlinalg/07-numlinalg.html)\] | Dr. Hua Zhou |
+| 2:30-3:00 | Numerical linear algebra: iterative algorithms \[[html](https://hua-zhou.github.io/JSM-Julia-Short-Course-2022/notebooks/08-iter/08-cg.html)\] | Dr. Hua Zhou |
 | 3:00-3:15 | Q&A, exercises | Participants |
 
 ### Mid-afternoon break: 3:15pm-3:30pm

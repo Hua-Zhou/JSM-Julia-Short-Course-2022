@@ -85,11 +85,17 @@ end
 # ╔═╡ 302c7b9f-6c50-42fc-a547-c2861e47ebcb
 md"## The Minimal-Memory Approach"
 
+# ╔═╡ 8226691a-e976-4070-b534-84833c817073
+rows = CSV.Rows(dataset, reusebuffer=true, missingstring=nothing)
+
+# ╔═╡ 79a0cd0e-084d-4bb6-b002-d5cf5ec4e39a
+first(rows)
+
 # ╔═╡ 17c1bb25-c2c0-46e8-9877-b1d85e5a34dd
 function analysis2(path)
-	rows = CSV.Rows(path)
+	rows = CSV.Rows(path, reusebuffer=true, missingstring=nothing)
 	o = Mean()
-	fit!(o, randn())
+	fit!(o, Parsers.parse(Float64,row.x) for row in rows)
 	o
 end
 
@@ -556,6 +562,8 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═b9b1a35d-c169-48d1-84bb-780384d35222
 # ╠═9cf6eaaf-6f16-4ded-8d0a-71e5fd6d4f50
 # ╟─302c7b9f-6c50-42fc-a547-c2861e47ebcb
+# ╠═8226691a-e976-4070-b534-84833c817073
+# ╠═79a0cd0e-084d-4bb6-b002-d5cf5ec4e39a
 # ╠═17c1bb25-c2c0-46e8-9877-b1d85e5a34dd
 # ╠═fa76118f-b55f-4210-855e-110f7a51faca
 # ╟─41b62a96-1753-11ed-37d0-d3682c207bbe

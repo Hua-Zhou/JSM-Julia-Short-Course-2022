@@ -125,10 +125,10 @@ end
 subtree_map = mapvalues(df -> maximum(df.High), subtree_dfs)
 
 # ╔═╡ 5c20f8d2-7a3f-40f7-8ae3-a21978d72e7d
-nflx_high = get(subtree_map["nflx.us.txt"])
+result = get(subtree_map["nflx.us.txt"])
 
 # ╔═╡ f95d009a-05d5-45c9-be72-ed49e4496a53
-# exec(nflx_high);  # Broken in Pluto, unfortunately
+# exec(result);  # Broken in Pluto, unfortunately
 
 # ╔═╡ a0187a03-d2d0-4992-aca4-77a2e488ebcd
 md"""

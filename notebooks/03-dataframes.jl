@@ -17,7 +17,10 @@ using DataFrames
 using RDatasets
 
 # ╔═╡ 8d887825-c3b5-4d08-8e3d-b434a672d384
-using StatsPlots
+begin
+	using StatsPlots
+	plotly()
+end
 
 # ╔═╡ 883da8c3-32c4-4f41-aa2c-898f8e0bb4c5
 using StatsBase
@@ -82,6 +85,8 @@ md"## How is Missing Data Represented in Julia?"
 # ╔═╡ cc491ac2-0e9c-45ca-9dcd-158fc0036644
 highlight(md"""
 - In Julia, missing data is represented by `missing`.
+- `missing` indicates: "There is a value, but we don't know what it is".
+- `nothing` indicates: "There is no value".
 """)
 
 # ╔═╡ 08794a3b-d165-4975-875c-03aca6f69ecf
@@ -204,6 +209,11 @@ highlight(md"""
 #### A nice resource is this [cheatsheet from Tom Kwong](https://www.ahsmart.com/assets/pages/data-wrangling-with-data-frames-jl-cheat-sheet/DataFramesCheatSheet_v1.x_rev1.pdf).
 """)
 
+# ╔═╡ d264284e-99ab-4795-9073-97dd5e025e1e
+highlight(md"""
+- If you are already familiar with a different language framework (e.g. Python's pandas), the DataFrames docs has a good section on [comparisons](https://dataframes.juliadata.org/stable/man/comparisons/).
+""")
+
 # ╔═╡ a8f795a0-0682-405f-9777-1621014756f5
 df = dataset("ggplot2", "diamonds")
 
@@ -320,6 +330,24 @@ md"## dplyr-ish functionality with DataFramesMeta"
 	@transform :avg_time = :request_time ./ :request_count
 	@orderby :avg_time
 end
+
+# ╔═╡ 3f25dcf1-456c-4dae-88c0-80063accd2f0
+md"# StatsPlots"
+
+# ╔═╡ 90b4128c-850e-4a1f-b6ce-cfc63e2bed14
+highlight(md"""
+- **StatsPlots** provides a `@df` macro for referring to columns names by their `Symbol`.
+""")
+
+# ╔═╡ 2466f13d-f0ba-4903-9f07-fb8ef8505559
+@df pkgs3 scatter(
+	:body_bytes_sent ./ :request_count, # avg. request body size
+	:request_time ./ :request_count;  # avg. request time
+	xlab="Avg. Request Body Size (bytes)",
+	ylab="Avg. Request Time (s)",
+	lab="",
+	hover = :name
+)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1684,6 +1712,7 @@ version = "1.4.1+0"
 # ╟─d11551f8-76a4-44e2-886d-bcd517a185ff
 # ╟─cf60d37b-c515-4422-b156-4d9adb6b23f6
 # ╟─5f7aba1d-c63a-473c-8e50-c07b0bc5b00d
+# ╠═d264284e-99ab-4795-9073-97dd5e025e1e
 # ╠═a2f45d2d-0155-4a29-a3a9-5456ec60d609
 # ╠═1c3c59e0-c17d-498c-80da-8e44e81f87be
 # ╠═a8f795a0-0682-405f-9777-1621014756f5
@@ -1713,6 +1742,9 @@ version = "1.4.1+0"
 # ╟─42714129-bb08-458a-bc36-0cd6c117a8af
 # ╠═aff02ffb-47c7-481c-9e4e-4d5e55797933
 # ╠═e8d2b57f-e5b6-480f-b00d-6af940c03626
+# ╟─3f25dcf1-456c-4dae-88c0-80063accd2f0
+# ╟─90b4128c-850e-4a1f-b6ce-cfc63e2bed14
+# ╠═2466f13d-f0ba-4903-9f07-fb8ef8505559
 # ╟─6ee9ee4b-b84b-4690-9034-e803e7023866
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

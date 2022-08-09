@@ -97,8 +97,21 @@ mpg = dataset("ggplot2", "mpg")
 # ╔═╡ 71687ca4-f522-4dce-ac10-997839affbd1
 f = @formula log(Hwy) ~ 1 + Displ * Cyl
 
+# ╔═╡ dd826c18-50a6-4efe-83a5-c5c4c05258e2
+highlight(md"""
+- Get the design (X) matrix with `modelmatrix`:
+""")
+
 # ╔═╡ f1531dd8-8c46-4106-ab2b-488f2676c34a
 X = modelmatrix(f, mpg)
+
+# ╔═╡ a692cae1-98fc-444c-a877-16c1b3cb8238
+highlight(md"""
+- Even if a package doesn't support the **StatsModels** formula, you can still use it to generate the `modelmatrix`:
+""")
+
+# ╔═╡ 063d301e-380f-45cd-a83e-1e0d84db0df9
+X \ mpg.Cty
 
 # ╔═╡ 8bfc1f5e-6aaa-45fa-96f6-81cf46e8f1a9
 md"## Generalized Linear Models with GLM.jl"
@@ -116,6 +129,15 @@ let
 	p
 end
 
+# ╔═╡ 85d1d5a9-0b86-434a-92bf-14921064e617
+md"### F Tests"
+
+# ╔═╡ bda75203-cc48-4174-a42c-c22308236d31
+linreg2 = lm(@formula(log(Hwy) ~ 1 + Displ & Cyl), mpg)
+
+# ╔═╡ c82387e1-30f4-474f-bd37-13b6152333c2
+ftest(linreg.model, linreg2.model)
+
 # ╔═╡ 39eb6ee5-c5d8-40ff-9f0e-26866069f96b
 md"## MLJ.jl"
 
@@ -129,6 +151,7 @@ import MLJ
 highlight(md"""
 - A **very impressive effort** (with many sponsors) for Machine Learning in Julia!
 - Brings together many models from many packages!
+- Similar scope to Python's [scikit-learn](https://scikit-learn.org/stable/).
 """)
 
 # ╔═╡ 73ad8cf7-1d5f-4f97-bd47-2a220a4681c0
@@ -136,6 +159,14 @@ MLJ.models()
 
 # ╔═╡ 827156ec-12ed-443b-b5d2-99a220bc5583
 MLJ.models("regressor")
+
+# ╔═╡ 4ac7a4a6-d586-44ef-b237-2aeb504f73eb
+md"## Other Packages to Highlight"
+
+# ╔═╡ 61908140-a1c9-4383-b685-d37ab69a9b7f
+highlight(md"""
+- [MixedModels.jl](https://github.com/JuliaStats/MixedModels.jl) by Doug Bates (R Core Member) of `lme4` fame.
+""")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1523,19 +1554,27 @@ version = "1.4.1+0"
 # ╠═415133bd-1ae4-4b6b-8acf-4da4f2ef9e20
 # ╠═9a47ea40-3cd7-476b-aa70-cf66a042530b
 # ╠═71687ca4-f522-4dce-ac10-997839affbd1
+# ╟─dd826c18-50a6-4efe-83a5-c5c4c05258e2
 # ╠═f1531dd8-8c46-4106-ab2b-488f2676c34a
+# ╟─a692cae1-98fc-444c-a877-16c1b3cb8238
+# ╠═063d301e-380f-45cd-a83e-1e0d84db0df9
 # ╟─8bfc1f5e-6aaa-45fa-96f6-81cf46e8f1a9
 # ╠═8d9ee6c1-d0d7-464a-90c2-5e723f98c976
 # ╟─b02aea36-1d2d-4154-a3bc-2b6ecee8b2fc
 # ╠═060ef945-d705-40b0-8bbd-775b039c279a
 # ╠═c86d3f2b-5cda-49e6-b498-71bc34540e8b
 # ╠═10e38320-a5dc-44d0-afef-74a8378c0f39
+# ╟─85d1d5a9-0b86-434a-92bf-14921064e617
+# ╠═bda75203-cc48-4174-a42c-c22308236d31
+# ╠═c82387e1-30f4-474f-bd37-13b6152333c2
 # ╟─39eb6ee5-c5d8-40ff-9f0e-26866069f96b
 # ╟─f71b67cc-9258-452c-94ca-21f754bf472c
 # ╠═d174ac2d-095c-495c-97e9-cf2a85e00d60
 # ╟─fe52c842-e05a-4dad-8e46-88c255706cc9
 # ╠═73ad8cf7-1d5f-4f97-bd47-2a220a4681c0
 # ╠═827156ec-12ed-443b-b5d2-99a220bc5583
+# ╟─4ac7a4a6-d586-44ef-b237-2aeb504f73eb
+# ╟─61908140-a1c9-4383-b685-d37ab69a9b7f
 # ╟─373b5f0c-de67-4218-bd19-d86cfe89dd99
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
