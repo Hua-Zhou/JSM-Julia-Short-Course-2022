@@ -5,6 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 1bd82d34-e308-463b-9674-db9a861cca24
+# Cairo is one of Makie's backends
 using CairoMakie
 
 # ╔═╡ e83969ed-1937-44d5-9035-b5fb29b8a6a6

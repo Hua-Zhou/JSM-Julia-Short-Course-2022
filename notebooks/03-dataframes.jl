@@ -4,6 +4,16 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
+
 # ╔═╡ d4dcacca-af6a-4df0-8fd9-4698e05b9c82
 using Pkg
 
@@ -80,7 +90,7 @@ md"""
 """
 
 # ╔═╡ 653d0470-5f01-434d-a60d-16818bdd8961
-md"## How is Missing Data Represented in Julia?"
+md"## How Missing Data is Represented in Julia "
 
 # ╔═╡ cc491ac2-0e9c-45ca-9dcd-158fc0036644
 highlight(md"""
@@ -197,12 +207,8 @@ sum(row.request_count for row in file if !ismissing(row.client_type) && row.clie
 # ╔═╡ d11551f8-76a4-44e2-886d-bcd517a185ff
 md"# DataFrames.jl"
 
-# ╔═╡ cf60d37b-c515-4422-b156-4d9adb6b23f6
-highlight(md"""
-### What is a DataFrame?
-
-- A DataFrame is tabular data, with observations in *rows*, variables in *columns*.
-""")
+# ╔═╡ 1ff70ab0-e267-4e32-b886-80c74feac8df
+md"![](https://dataframes.juliadata.org/stable/assets/logo.png)"
 
 # ╔═╡ 5f7aba1d-c63a-473c-8e50-c07b0bc5b00d
 highlight(md"""
@@ -214,11 +220,60 @@ highlight(md"""
 - If you are already familiar with a different language framework (e.g. Python's pandas), the DataFrames docs has a good section on [comparisons](https://dataframes.juliadata.org/stable/man/comparisons/).
 """)
 
-# ╔═╡ a8f795a0-0682-405f-9777-1621014756f5
-df = dataset("ggplot2", "diamonds")
+# ╔═╡ cf60d37b-c515-4422-b156-4d9adb6b23f6
+highlight(md"""
+### What is a DataFrame?
+
+- A DataFrame is tabular data, with observations in *rows*, variables in *columns*.
+""")
+
+# ╔═╡ 4d6aa7ca-e028-44a7-81db-c5162b8befa5
+# Creating a DataFrame with keyword arguments
+data = DataFrame(x=1:5, y=randn(5), var"name with space" = 'A':'E')
+
+# ╔═╡ 3141de33-a401-404c-a57c-82ddcffe1bbc
+# Access the column of a DataFrame with `getproperty` (`.` syntax)
+data.x
+
+# ╔═╡ 489743b5-d248-4a15-a800-30dccf7f8c42
+# You can also retrieve columns using `String`s
+data."name with space"
+
+# ╔═╡ b1d5e11c-c4bc-401d-8439-f5540d27ed92
+md"## Subsets of Rows and Columns"
+
+# ╔═╡ 51591d10-8ab4-4753-b97b-29ecb4c95a12
+# Rows 1-3 and all columns
+data[1:3, :]
+
+# ╔═╡ e8d9945b-f9cf-466a-bbf3-ea6f04d4fd2c
+# Rows 1 and 3, columns :y and :x
+data[[1,3], [:y, :x]]
+
+# ╔═╡ 2fc79f99-7ab5-42c1-8564-f6fed0f0eae8
+highlight(md"""
+- For *selecting columns*, there are some special selectors you can use.
+""")
+
+# ╔═╡ c0c7ab99-d504-4df1-878b-fbd114d3f6f1
+@bind sel Select([Not(:x), All(), Between(:x, :y)])
+
+# ╔═╡ ed22c2a1-8031-4f64-989a-8890515b2b90
+# Note: There is also `select!` to mutate the DataFrame
+select(data, sel)
 
 # ╔═╡ 9a559f44-e67e-452c-a996-d5d85f051902
-md"# `CategoricalArray` and `CategoricalValue`?"
+md"# Categorical Data"
+
+# ╔═╡ 794e8d7f-4632-4658-9be0-aedcb48350f1
+highlight(md"""
+### RDatasets.jl
+- Lets you access many R packages' built-in datasets.
+- Great for example data!
+""")
+
+# ╔═╡ a8f795a0-0682-405f-9777-1621014756f5
+df = dataset("ggplot2", "diamonds")
 
 # ╔═╡ ce312940-fb8e-4346-89d4-7851ce5e4b6c
 highlight(md"""
@@ -238,6 +293,33 @@ x = df.Cut[1]
 
 # ╔═╡ 9900470e-be0d-43e5-b46d-4999c6da8bd2
 plot(sort(df.Cut), label="")
+
+# ╔═╡ 76f3b46e-41e9-4371-a0cc-91ace2885994
+md"## Group-by"
+
+# ╔═╡ 0ca0e971-b051-4fa7-a5e4-b8a8613122d0
+gb = groupby(df, :Cut);
+
+# ╔═╡ c3221725-5b1d-4116-abbe-ebcda8fdad1e
+typeof(gb)
+
+# ╔═╡ 90471968-1c9e-4584-b341-ec8d12f859b3
+highlight(md"""
+- **DataFrames** has a mini-language to describe transformations of columns.
+
+```julia
+source_column => transformation => target_column_name
+source_column => transformation
+source_column => target_column_name
+```
+""")
+
+# ╔═╡ 2c74a824-afce-4aaa-9b1d-f8bfcd4c560e
+combine(gb, :Price => mean => :meanprice)
+
+# ╔═╡ 710cdca0-e278-4143-9d71-8c673f316ccc
+# multiple combinations
+combine(gb, :Price => mean, :Carat => maximum)
 
 # ╔═╡ 14b247fb-5eba-4c4b-8891-7ab072e33639
 md"# Package Downloads Example"
@@ -322,6 +404,12 @@ end
 
 # ╔═╡ 42714129-bb08-458a-bc36-0cd6c117a8af
 md"## dplyr-ish functionality with DataFramesMeta"
+
+# ╔═╡ d7bbcd9f-12e7-42ec-92fb-a68c12ab63c4
+highlight(md"""
+- Another popular option is [Query.jl](https://github.com/queryverse/Query.jl).
+- Both packages have similar maturity/support.
+""")
 
 # ╔═╡ e8d2b57f-e5b6-480f-b00d-6af940c03626
 @chain pkgs3 begin 
@@ -1710,19 +1798,36 @@ version = "1.4.1+0"
 # ╠═1c4eb671-a869-409a-814e-913b64373270
 # ╟─a6d8c835-d43c-4f78-b16a-0e4d82262595
 # ╟─d11551f8-76a4-44e2-886d-bcd517a185ff
-# ╟─cf60d37b-c515-4422-b156-4d9adb6b23f6
+# ╟─1ff70ab0-e267-4e32-b886-80c74feac8df
 # ╟─5f7aba1d-c63a-473c-8e50-c07b0bc5b00d
-# ╠═d264284e-99ab-4795-9073-97dd5e025e1e
+# ╟─d264284e-99ab-4795-9073-97dd5e025e1e
+# ╟─cf60d37b-c515-4422-b156-4d9adb6b23f6
 # ╠═a2f45d2d-0155-4a29-a3a9-5456ec60d609
-# ╠═1c3c59e0-c17d-498c-80da-8e44e81f87be
-# ╠═a8f795a0-0682-405f-9777-1621014756f5
+# ╠═4d6aa7ca-e028-44a7-81db-c5162b8befa5
+# ╠═3141de33-a401-404c-a57c-82ddcffe1bbc
+# ╠═489743b5-d248-4a15-a800-30dccf7f8c42
+# ╟─b1d5e11c-c4bc-401d-8439-f5540d27ed92
+# ╠═51591d10-8ab4-4753-b97b-29ecb4c95a12
+# ╠═e8d9945b-f9cf-466a-bbf3-ea6f04d4fd2c
+# ╟─2fc79f99-7ab5-42c1-8564-f6fed0f0eae8
+# ╠═c0c7ab99-d504-4df1-878b-fbd114d3f6f1
+# ╠═ed22c2a1-8031-4f64-989a-8890515b2b90
 # ╟─9a559f44-e67e-452c-a996-d5d85f051902
+# ╠═1c3c59e0-c17d-498c-80da-8e44e81f87be
+# ╟─794e8d7f-4632-4658-9be0-aedcb48350f1
+# ╠═a8f795a0-0682-405f-9777-1621014756f5
 # ╟─ce312940-fb8e-4346-89d4-7851ce5e4b6c
 # ╠═d45938b3-05dd-49bf-8973-abecd3665355
 # ╠═2313e4be-64fd-463c-b5a1-a9cc2d6205cd
 # ╠═b2d2e40a-530a-46b2-994d-b88d27188d6a
 # ╠═8d887825-c3b5-4d08-8e3d-b434a672d384
 # ╠═9900470e-be0d-43e5-b46d-4999c6da8bd2
+# ╟─76f3b46e-41e9-4371-a0cc-91ace2885994
+# ╠═0ca0e971-b051-4fa7-a5e4-b8a8613122d0
+# ╠═c3221725-5b1d-4116-abbe-ebcda8fdad1e
+# ╟─90471968-1c9e-4584-b341-ec8d12f859b3
+# ╠═2c74a824-afce-4aaa-9b1d-f8bfcd4c560e
+# ╠═710cdca0-e278-4143-9d71-8c673f316ccc
 # ╟─14b247fb-5eba-4c4b-8891-7ab072e33639
 # ╠═883da8c3-32c4-4f41-aa2c-898f8e0bb4c5
 # ╠═9da3e35b-1fdb-42d9-958c-161543fff50f
@@ -1740,6 +1845,7 @@ version = "1.4.1+0"
 # ╟─e87be55d-7997-4fda-b33f-879772961598
 # ╠═aedbd808-a59a-46ff-b8f7-d2c1f37ee6d5
 # ╟─42714129-bb08-458a-bc36-0cd6c117a8af
+# ╟─d7bbcd9f-12e7-42ec-92fb-a68c12ab63c4
 # ╠═aff02ffb-47c7-481c-9e4e-4d5e55797933
 # ╠═e8d2b57f-e5b6-480f-b00d-6af940c03626
 # ╟─3f25dcf1-456c-4dae-88c0-80063accd2f0

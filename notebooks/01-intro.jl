@@ -158,6 +158,12 @@ mat = rand(5, 2)
 # ╔═╡ 3bf16f75-5496-44d8-a67a-c3a30c7a5f6b
 mat[4,2]  # 4th row of 2nd column
 
+# ╔═╡ 83e2cca5-456a-412a-abdb-2a0c0cf5b682
+mat[:, 1]  # : indicates all items in that dimension
+
+# ╔═╡ b044de45-67cf-464c-9cbd-bf522ef526af
+mat[end - 3, 2]  # `end` gets replace with the last index
+
 # ╔═╡ 85ebe63c-445a-4c6b-8ad6-2420f0bf7b98
 md"""
 ### Arrays are Column-Major
@@ -181,6 +187,49 @@ mat[4,2] == mat[9] == mat[end-1]
 
 # ╔═╡ 8a1cc6fb-386f-4fe3-8b42-091be2b59296
 collect(1:4)  # `collect`-ing any iterator puts items in a `Vector`
+
+# ╔═╡ 157cb0fb-ca63-4f2c-b506-2331f2fabda3
+md"## Mutating Functions"
+
+# ╔═╡ d907974a-44b4-4acc-bfa9-ec1ba59364d2
+highlight(md"""
+- By convention, functions ending with `!` *mutate* one of their arguments (typically the first positional argument).
+""")
+
+# ╔═╡ 2d1aac3c-d417-43c1-829a-e9f94b1cdcce
+let
+	results = zeros(5, 2)
+
+	# `do` syntax is a way of writing an anonymous function
+	map!(results, mat) do x 
+		x + 10
+	end
+	results
+end
+
+# ╔═╡ d2dfb347-6884-4989-9028-0621dab9fc61
+md"## Broadcasting"
+
+# ╔═╡ ed58047b-4f13-4b4d-8985-bd22155f7c69
+highlight(md"The code below errors!  Why?")
+
+# ╔═╡ 4c32aad7-047a-4c69-8e7a-1b83233ff92f
+sin(1:10)
+
+# ╔═╡ a0a79a73-8f10-4eaf-af35-dd96cdb711ce
+highlight(md"""
+- Julia requires explicit broadcasting.
+""")
+
+# ╔═╡ 216ba0c2-2620-4bbb-8c10-8dc7eb319291
+sin.(1:10)
+
+# ╔═╡ 8371ee27-74e8-4609-a2dd-c435caa822fd
+highlight(md"- Broadcasted functions can be *fused*.")
+
+# ╔═╡ 4172d167-c472-48ba-b2bf-d103d0892bd2
+# No temporary Vectors are created here!
+sin.(1:10) .+ 1 ./ rand(10)
 
 # ╔═╡ 14741019-e531-47cc-a7b2-2aeecc14eda4
 md"## Working with Strings"
@@ -1856,10 +1905,22 @@ version = "0.9.1+5"
 # ╠═22ba41bb-d825-440e-aa3b-786f690b358d
 # ╠═f9955564-f52b-4bfd-83ea-449d015ec6cf
 # ╠═3bf16f75-5496-44d8-a67a-c3a30c7a5f6b
+# ╠═83e2cca5-456a-412a-abdb-2a0c0cf5b682
+# ╠═b044de45-67cf-464c-9cbd-bf522ef526af
 # ╟─85ebe63c-445a-4c6b-8ad6-2420f0bf7b98
 # ╠═11019ccf-82b7-401c-9361-b72ebd518b6e
 # ╠═c919e0b2-c8fa-4b2f-aa43-93f2976f50f8
 # ╠═8a1cc6fb-386f-4fe3-8b42-091be2b59296
+# ╟─157cb0fb-ca63-4f2c-b506-2331f2fabda3
+# ╟─d907974a-44b4-4acc-bfa9-ec1ba59364d2
+# ╠═2d1aac3c-d417-43c1-829a-e9f94b1cdcce
+# ╟─d2dfb347-6884-4989-9028-0621dab9fc61
+# ╟─ed58047b-4f13-4b4d-8985-bd22155f7c69
+# ╠═4c32aad7-047a-4c69-8e7a-1b83233ff92f
+# ╟─a0a79a73-8f10-4eaf-af35-dd96cdb711ce
+# ╠═216ba0c2-2620-4bbb-8c10-8dc7eb319291
+# ╟─8371ee27-74e8-4609-a2dd-c435caa822fd
+# ╠═4172d167-c472-48ba-b2bf-d103d0892bd2
 # ╟─14741019-e531-47cc-a7b2-2aeecc14eda4
 # ╟─ef26e0fd-9128-4289-96e2-edd819c5f5a4
 # ╠═5be2030d-34cd-4d87-b6fa-e141d2115c68

@@ -130,10 +130,11 @@ result = get(subtree_map["nflx.us.txt"])
 # ╔═╡ f95d009a-05d5-45c9-be72-ed49e4496a53
 # exec(result);  # Broken in Pluto, unfortunately
 
+# ╔═╡ b9052800-4a2a-49dd-bed6-adb8aceb0594
+highlight(md"Unfortunately, there are issues with using the **Distributed** package inside Pluto.  Run this in the REPL:")
+
 # ╔═╡ a0187a03-d2d0-4992-aca4-77a2e488ebcd
 md"""
-Unfortunately, there are issues with using the **Distributed** package inside Pluto.  Run this in the REPL:
-
 ```julia
 using Distributed
 
@@ -161,11 +162,21 @@ end
 
 subtree_map = mapvalues(df -> maximum(df.High), subtree_dfs)
 
-result = get(subtree_map["nflx.us.txt"])
+vals = exec(subtree_map)
 
-exec(result)
+result = get(vals["nflx.us.txt"])
 ```
 """
+
+# ╔═╡ 76b3e7a2-3b72-42fb-8423-add336ef2ed5
+highlight(md"In this example, the overhead of the scheduler is longer than the eager calculation.  Distributed is not always faster!")
+
+# ╔═╡ e8d994d6-10b7-4453-8283-5122df7ebbd5
+highlight(md"""
+For further reading on parallel computing in Julia, I highly recommend ["A quick introduction to data parallelism in Julia" by Takafumi Arakaki (`@tkf` on GitHub)](https://juliafolds.github.io/data-parallelism/tutorials/quick-introduction/).
+
+- Related: see `@tkf`'s [Folds.jl](https://github.com/JuliaFolds/Folds.jl) package.
+""")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -665,7 +676,10 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═81f9f8b4-41a5-4bec-b2ae-70338ceb3596
 # ╠═5c20f8d2-7a3f-40f7-8ae3-a21978d72e7d
 # ╠═f95d009a-05d5-45c9-be72-ed49e4496a53
+# ╟─b9052800-4a2a-49dd-bed6-adb8aceb0594
 # ╟─a0187a03-d2d0-4992-aca4-77a2e488ebcd
+# ╟─76b3e7a2-3b72-42fb-8423-add336ef2ed5
+# ╟─e8d994d6-10b7-4453-8283-5122df7ebbd5
 # ╟─fe14494e-175e-11ed-1c0c-4ffc780021a6
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

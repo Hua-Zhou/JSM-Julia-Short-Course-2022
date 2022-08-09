@@ -63,8 +63,7 @@ highlight(md"""
 
 # ╔═╡ b6848e60-1f9c-4626-862a-a0a22302fa25
 highlight(md"""
-- This is not an actual big data example.
-- **However**, we will show that this is scale-able. 
+- Note: This is not an actual big data example.
 """)
 
 # ╔═╡ 51629418-7d50-4208-9bb8-0b72388c5fc2
@@ -84,6 +83,12 @@ end
 
 # ╔═╡ 302c7b9f-6c50-42fc-a547-c2861e47ebcb
 md"## The Minimal-Memory Approach"
+
+# ╔═╡ b39c0d55-e20a-4ef6-8564-464675028b67
+highlight(md"""
+- `CSV.Rows` iterates just like `CSV.File`.
+- *But!*  You don't get type inference.  All data is an `AbstractString` and you need to parse the data yourself.
+""")
 
 # ╔═╡ 8226691a-e976-4070-b534-84833c817073
 rows = CSV.Rows(dataset, reusebuffer=true, missingstring=nothing)
@@ -556,12 +561,13 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─3e84a9f8-c301-4e96-9231-7a5e0351eed4
 # ╟─73d9f86b-9155-4984-aa58-a3b5a37731bd
 # ╠═11d8809e-c32d-49e3-a285-ef8872eb4266
-# ╟─b6848e60-1f9c-4626-862a-a0a22302fa25
+# ╠═b6848e60-1f9c-4626-862a-a0a22302fa25
 # ╠═51629418-7d50-4208-9bb8-0b72388c5fc2
 # ╟─7ae9df5d-3948-457a-be0d-88d03bc23366
 # ╠═b9b1a35d-c169-48d1-84bb-780384d35222
 # ╠═9cf6eaaf-6f16-4ded-8d0a-71e5fd6d4f50
 # ╟─302c7b9f-6c50-42fc-a547-c2861e47ebcb
+# ╟─b39c0d55-e20a-4ef6-8564-464675028b67
 # ╠═8226691a-e976-4070-b534-84833c817073
 # ╠═79a0cd0e-084d-4bb6-b002-d5cf5ec4e39a
 # ╠═17c1bb25-c2c0-46e8-9877-b1d85e5a34dd
