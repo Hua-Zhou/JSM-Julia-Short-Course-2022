@@ -73,7 +73,7 @@ md"""
 Our chosen medium for workshop materials are [Pluto notebooks](https://github.com/fonsp/Pluto.jl), a reactive notebook environment unique to Julia (more on this later).
 
 #### JuypterHub (During Workshop)
-- Log into our JupyterHub environment here: [http://34.150.190.173/](http://34.150.190.173/)
+- Log into our JupyterHub environment here: [ http://34.150.236.152/]( http://34.150.236.152/)
 
 
 #### GitHub repo (After Workshop)
@@ -1892,7 +1892,7 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╟─9dfd7a06-d45e-4da8-8b50-86da247a0af5
+# ╠═9dfd7a06-d45e-4da8-8b50-86da247a0af5
 # ╟─55446126-07e0-4a8c-a6da-dc5ff5788b01
 # ╟─f0250481-36c5-45cd-b009-fa3b6313d319
 # ╟─7850695f-7bbb-42fe-903c-d03e21c47325
