@@ -53,7 +53,7 @@ This repo contains the materials for the short course [Julia for Data Science an
 
 We provide a server where you can run tutorials (Pluto or Jupyter notebooks) during the course.
 
-1. Server address: <http://XX.XXX.XXX.XX/>
+1. Server address: <http://34.150.190.173/>
 
 2. **Username** will be same as the email address (before the @, all lower case) you used to register for the workshop. For example, if you registered for the workshop using email `Jane.Bruin@ucla.edu`, then your username on the server will be `jane.bruin`. **Password** is announced during the workshop.
 
