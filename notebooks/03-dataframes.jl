@@ -16,11 +16,14 @@ using DataFrames
 # ╔═╡ 1c3c59e0-c17d-498c-80da-8e44e81f87be
 using RDatasets
 
+# ╔═╡ 8d887825-c3b5-4d08-8e3d-b434a672d384
+using StatsPlots
+
 # ╔═╡ 883da8c3-32c4-4f41-aa2c-898f8e0bb4c5
 using StatsBase
 
-# ╔═╡ 8add207e-5a6c-48f3-8984-df0baff62348
-using StatsPlots
+# ╔═╡ aff02ffb-47c7-481c-9e4e-4d5e55797933
+using DataFramesMeta
 
 # ╔═╡ 6ee9ee4b-b84b-4690-9034-e803e7023866
 begin
@@ -301,9 +304,21 @@ highlight(md"- Only get data from *users* where download was successful.")
 
 # ╔═╡ aedbd808-a59a-46ff-b8f7-d2c1f37ee6d5
 pkgs3 = filter(pkgs2) do row 
-	row.status == 200 &&  				# download was successful
+	!ismissing(row.status) && 
+		row.status == 200 &&  				# download was successful
 		!ismissing(row.client_type) &&  # client_type not missing
 		row.client_type == "user" 		# client_type was "users"
+end
+
+# ╔═╡ 42714129-bb08-458a-bc36-0cd6c117a8af
+md"## dplyr-ish functionality with DataFramesMeta"
+
+# ╔═╡ e8d2b57f-e5b6-480f-b00d-6af940c03626
+@chain pkgs3 begin 
+	@rsubset :request_count > 100
+	@select(:name, :request_time, :request_count)
+	@transform :avg_time = :request_time ./ :request_count
+	@orderby :avg_time
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -311,6 +326,7 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DataFramesMeta = "1313f7d8-7da2-5740-9ea0-a2ca25f37964"
 Formatting = "59287772-0a20-5a39-b81b-1366585eb4c0"
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
@@ -321,6 +337,7 @@ StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 [compat]
 CSV = "~0.10.4"
 DataFrames = "~1.3.4"
+DataFramesMeta = "~0.12.0"
 Formatting = "~0.4.2"
 PlutoUI = "~0.7.39"
 RDatasets = "~0.7.7"
@@ -410,6 +427,11 @@ git-tree-sha1 = "5f5a975d996026a8dd877c35fe26a7b8179c02ba"
 uuid = "324d7699-5711-5eae-9e2f-1d82baa6b597"
 version = "0.10.6"
 
+[[deps.Chain]]
+git-tree-sha1 = "8c4920235f6c561e401dfe569beb8b924adad003"
+uuid = "8be319e6-bccf-4806-a6f7-6fae938471bc"
+version = "0.5.0"
+
 [[deps.ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra", "SparseArrays"]
 git-tree-sha1 = "80ca332f6dcb2508adba68f22f551adb2d00a624"
@@ -488,6 +510,12 @@ deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExte
 git-tree-sha1 = "daa21eb85147f72e41f6352a57fccea377e310a9"
 uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 version = "1.3.4"
+
+[[deps.DataFramesMeta]]
+deps = ["Chain", "DataFrames", "MacroTools", "OrderedCollections", "Reexport"]
+git-tree-sha1 = "a70c340c1306febfd770a932218561b5e19cf0f6"
+uuid = "1313f7d8-7da2-5740-9ea0-a2ca25f37964"
+version = "0.12.0"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -568,6 +596,11 @@ version = "2.4.8+0"
 git-tree-sha1 = "56559bbef6ca5ea0c0818fa5c90320398a6fbf8d"
 uuid = "e2ba6199-217a-4e67-a87a-7c52f15ade04"
 version = "0.1.8"
+
+[[deps.Extents]]
+git-tree-sha1 = "5e1e4c53fa39afe63a7d356e30452249365fba99"
+uuid = "411431e0-e8b7-467b-b5e0-f676ba4f2910"
+version = "0.1.1"
 
 [[deps.FFMPEG]]
 deps = ["FFMPEG_jll"]
@@ -650,9 +683,9 @@ uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
-git-tree-sha1 = "51d2dfe8e590fbd74e7a842cf6d13d8a2f45dc01"
+git-tree-sha1 = "d972031d28c8c8d9d7b41a536ad7bb0c2579caca"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
-version = "3.3.6+0"
+version = "3.3.8+0"
 
 [[deps.GR]]
 deps = ["Base64", "DelimitedFiles", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Pkg", "Printf", "Random", "RelocatableFolders", "Serialization", "Sockets", "Test", "UUIDs"]
@@ -666,11 +699,17 @@ git-tree-sha1 = "c8ab731c9127cd931c93221f65d6a1008dad7256"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
 version = "0.66.0+0"
 
+[[deps.GeoInterface]]
+deps = ["Extents"]
+git-tree-sha1 = "fb28b5dc239d0174d7297310ef7b84a11804dfab"
+uuid = "cf35fbd7-0cd7-5166-be24-54bfbe79505f"
+version = "1.0.1"
+
 [[deps.GeometryBasics]]
-deps = ["EarCut_jll", "IterTools", "LinearAlgebra", "StaticArrays", "StructArrays", "Tables"]
-git-tree-sha1 = "83ea630384a13fc4f002b77690bc0afeb4255ac9"
+deps = ["EarCut_jll", "GeoInterface", "IterTools", "LinearAlgebra", "StaticArrays", "StructArrays", "Tables"]
+git-tree-sha1 = "a7a97895780dab1085a97769316aa348830dc991"
 uuid = "5c1252a2-5f33-56bf-86c9-59e7332b4326"
-version = "0.4.2"
+version = "0.4.3"
 
 [[deps.Gettext_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "XML2_jll"]
@@ -945,9 +984,9 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "Random", "Sockets"]
-git-tree-sha1 = "14cb991ee7ccc6dabda93d310400575c3cae435b"
+git-tree-sha1 = "d9ab10da9de748859a7780338e1d6566993d1f25"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "1.1.2"
+version = "1.1.3"
 
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1087,9 +1126,9 @@ version = "1.3.0"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "GeometryBasics", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "05873db92e703f134649d88b8a164f3b7acb4d73"
+git-tree-sha1 = "79830c17fe30f234931767238c584b3a75b3329d"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.31.5"
+version = "1.31.6"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
@@ -1608,9 +1647,9 @@ version = "3.5.0+0"
 
 [[deps.xkbcommon_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg", "Wayland_jll", "Wayland_protocols_jll", "Xorg_libxcb_jll", "Xorg_xkeyboard_config_jll"]
-git-tree-sha1 = "ece2350174195bb31de1a63bea3a41ae1aa593b6"
+git-tree-sha1 = "9ebfc140cc56e8c2156a15ceac2f0302e327ac0a"
 uuid = "d8fb68d0-12a3-5cfd-a85a-d49703b185fd"
-version = "0.9.1+5"
+version = "1.4.1+0"
 """
 
 # ╔═╡ Cell order:
@@ -1653,6 +1692,7 @@ version = "0.9.1+5"
 # ╠═d45938b3-05dd-49bf-8973-abecd3665355
 # ╠═2313e4be-64fd-463c-b5a1-a9cc2d6205cd
 # ╠═b2d2e40a-530a-46b2-994d-b88d27188d6a
+# ╠═8d887825-c3b5-4d08-8e3d-b434a672d384
 # ╠═9900470e-be0d-43e5-b46d-4999c6da8bd2
 # ╟─14b247fb-5eba-4c4b-8891-7ab072e33639
 # ╠═883da8c3-32c4-4f41-aa2c-898f8e0bb4c5
@@ -1670,7 +1710,9 @@ version = "0.9.1+5"
 # ╟─722551f1-beed-41ed-b13b-553976064eea
 # ╟─e87be55d-7997-4fda-b33f-879772961598
 # ╠═aedbd808-a59a-46ff-b8f7-d2c1f37ee6d5
-# ╠═8add207e-5a6c-48f3-8984-df0baff62348
+# ╟─42714129-bb08-458a-bc36-0cd6c117a8af
+# ╠═aff02ffb-47c7-481c-9e4e-4d5e55797933
+# ╠═e8d2b57f-e5b6-480f-b00d-6af940c03626
 # ╟─6ee9ee4b-b84b-4690-9034-e803e7023866
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
