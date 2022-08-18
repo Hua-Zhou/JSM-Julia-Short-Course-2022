@@ -53,7 +53,7 @@ This repo contains the materials for the short course [Julia for Data Science an
 
 We provide a server where you can run tutorials (Pluto or Jupyter notebooks) during the course.
 
-1. Server address: <http://34.150.236.152/>
+1. Server address: <http://34.150.236.152/> (expired on Aug 17, 2022)
 
 2. **Username** will be same as the email address (before the @, all lower case) you used to register for the workshop. For example, if you registered for the workshop using email `Jane.Bruin@ucla.edu`, then your username on the server will be `jane.bruin`. **Password** is announced during the workshop.
 
@@ -69,7 +69,7 @@ We provide a server where you can run tutorials (Pluto or Jupyter notebooks) dur
 
 2. In JupyterLab, avoid running many kernels at the same time. Promptly shut down the kernels you don't use.
 
-3. If your kernel dies, most likely you have used more resource than allocated (1 CPU core and 3.6 GB memory). Make sure that you shut down the kernels not in use and try again. Remember that running the tutorials is optional. You can always read the static slides if the server is not responding. We plan to make the workshop materials available to you after the workshop, so you can try again later.
+3. If your kernel dies, most likely you have used more resource than allocated (2 CPU core and 3.6 GB memory). Make sure that you shut down the kernels not in use and try again. Remember that running the tutorials is optional. You can always read the static slides if the server is not responding. We plan to make the workshop materials available to you after the workshop, so you can try again later.
 
 ## Run Jupyter/Pluto notebooks on your own laptop
 
