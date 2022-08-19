@@ -120,6 +120,14 @@ gcloud container clusters resize \
     --zone us-west2-a
 ```
 
+Sometimes, you might want to delete existing pods, pvs, and pvcs to reset persistent storages for single users (e.g. cleaning up files generated from gitpuller). Delete them by using the following commands, _after_ turning off the single server that uses them from JupyterHub Control Panel.
+
+```
+kubectl delete pod <pod-name> --namespace jhub
+kubectl delete pvc <pvc-name> --namespace jhub
+kubectl delete pv <pv-name>  --namespace jhub
+```
+
 # Creating PVC with `ReadOnlyMany` access
 
 Create a zonal-SSD `mimic-iv` for MIMIC IV v1.0 data.
