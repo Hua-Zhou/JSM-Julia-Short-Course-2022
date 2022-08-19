@@ -43,6 +43,7 @@ ENV JULIA_DEFAULT_ENV="${JULIA_DEPOT_PATH}/environments/v1.7"
 
 RUN mkdir -p $JULIA_DEFAULT_ENV
 
+# package list. HDF5 and IJulia must be included in Project.toml
 COPY Project.toml $JULIA_DEFAULT_ENV
 
 USER root
